@@ -10,7 +10,7 @@ Create a new Reference
 
 <h3>Here you can add a Book Reference</h3>
 
-<form action="/create_todo" method="post">
+<form action="/create_book" method="post">
   {% with messages = get_flashed_messages() %}
     {% if messages %}
       <ul>
@@ -29,7 +29,7 @@ Create a new Reference
   <label for="year">Year:</label>
   <input type="text" name="year"></p>
   <label for="publisher">Publisher:</label>
-  <input type="text" name="year"></p>
+  <input type="text" name="publisher"></p>
   <br>
   <button type="submit">
     Create
