@@ -27,3 +27,9 @@ Open And Configure Browser
 Reset Todos
     Go To  ${RESET_URL}
 
+Create Page Should Be Open
+    Title Should Be  Create a new Reference
+
+Go To Starting Page
+    Go To  ${HOME_URL}
+
