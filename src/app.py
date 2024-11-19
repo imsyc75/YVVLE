@@ -28,7 +28,7 @@ def book_creation():
         return redirect("/")
     except Exception as error:
         flash(str(error))
-        return  redirect("/new_todo")
+        return  redirect("/new_book")
 
 # testausta varten oleva reitti
 if test_env:
