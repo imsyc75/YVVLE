@@ -1,35 +1,34 @@
 from flask import redirect, render_template, request, jsonify, flash
 from db_helper import reset_db
-from repositories.todo_repository import get_todos, create_todo, set_done
+
+#Get stuff from book_repository
+from repositories.book_repository import get_books, create_book
 from config import app, test_env
-from util import validate_todo
+from util import validate_book
 
 @app.route("/")
 def index():
-    todos = get_todos()
-    unfinished = len([todo for todo in todos if not todo.done])
-    return render_template("index.html", todos=todos, unfinished=unfinished) 
+    return render_template("index.html") 
 
-@app.route("/new_todo")
+@app.route("/new_book")
 def new():
-    return render_template("new_todo.html")
+    return render_template("new_book.html")
 
-@app.route("/create_todo", methods=["POST"])
-def todo_creation():
-    content = request.form.get("content")
-
+#Create new book
+@app.route("/create_book", methods=["POST"])
+def book_creation():
+    key = request.form.get("key")
+    author = request.form.get("author")
+    title = request.form.get("title")
+    year = request.form.get("year")
+    publisher = request.form.get("publisher")
     try:
-        validate_todo(content)
-        create_todo(content)
+        #validate_book(content) TODO
+        create_book(key, author, title, year, publisher)
         return redirect("/")
     except Exception as error:
         flash(str(error))
-        return  redirect("/new_todo")
-
-@app.route("/toggle_todo/<todo_id>", methods=["POST"])
-def toggle_todo(todo_id):
-    set_done(todo_id)
-    return redirect("/")
+        return  redirect("/new_book")
 
 # testausta varten oleva reitti
 if test_env:
