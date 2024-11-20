@@ -35,9 +35,9 @@ Use the following command to launch the application in the Poetry virtual enviro
 python src/index.py
 ```
 
-Use the following command to execute the robot test:
+Use the following command to execute the robot tests:
 ```python
-robot --include create src/story_tests
+robot --include create --include create2 src/story_tests
 ```
 
 
