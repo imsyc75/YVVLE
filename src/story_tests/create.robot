@@ -10,4 +10,10 @@ Click Create Link
     Click Link  Create a new Reference
     Create Page Should Be Open
 
-Create A New Reference
+Create Reference
+    [Tags]  create2
+    Click Link  Create a new Reference
+    Create Book  asd  kalle  kallen kirja  SKS  1999
+    Click Button  Create
+    ${book}=  Get Books
+    Should Be Equal  ${book}  asd kalle kallen kirja SKS 1999

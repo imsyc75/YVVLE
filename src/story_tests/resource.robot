@@ -1,5 +1,6 @@
 *** Settings ***
 Library  SeleniumLibrary
+Library  ../AppLibrary.py
 
 *** Variables ***
 ${SERVER}     localhost:5001
@@ -29,6 +30,9 @@ Reset Todos
 
 Create Page Should Be Open
     Title Should Be  Create a new Reference
+
+Starting Page Should Be Open
+    Page Should Contain  Welcome to BibTex References
 
 Go To Starting Page
     Go To  ${HOME_URL}
