@@ -1,7 +1,7 @@
 from config import db, app
 from sqlalchemy import text
 
-table_names = ["inproceedings", "articles", "books"]
+table_names = ["articles", "books", "inproceedings"]
 
 def table_exists(name):
   sql_table_existence = text(
@@ -30,6 +30,7 @@ def reset_db():
 def print_db():
   result = []
   for table_name in table_names:
+    result.append(table_name + ":")
     sql = text(f"SELECT * FROM {table_name}")
     result.append(db.session.execute(sql).fetchall())
   return result   
@@ -53,7 +54,7 @@ def setup_db():
         "  key TEXT NOT NULL,"
         "  author TEXT NOT NULL,"
         "  title TEXT NOT NULL,"
-        "  year VARCHAR(4) NOT NULL,"
+        "  year TEXT NOT NULL,"
         "  booktitle TEXT NOT NULL"
         ")"
       )
@@ -64,7 +65,7 @@ def setup_db():
         "  key TEXT NOT NULL,"
         "  author TEXT NOT NULL,"
         "  title TEXT NOT NULL,"
-        "  year VARCHAR(4) NOT NULL,"
+        "  year TEXT NOT NULL,"
         "  journal TEXT NOT NULL"
         ")"
       )
@@ -75,7 +76,7 @@ def setup_db():
         "  key TEXT NOT NULL,"
         "  author TEXT NOT NULL,"
         "  title TEXT NOT NULL,"
-        "  year VARCHAR(4) NOT NULL,"
+        "  year TEXT NOT NULL,"
         "  publisher TEXT NOT NULL"
         ")"
       )  

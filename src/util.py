@@ -7,3 +7,12 @@ def validateNotEmpty(params):
         #Also remove whitespace
         if not param.strip():
             raise ValueError("Fill all fields")
+
+def validateLength(params, min, max):
+    for p in params:
+        #Remove whitespace
+        param = p.strip()
+        if len(param) > max:
+            raise ValueError("Field too long")
+        if len(param) < min:
+            raise ValueError("Field too shot")    

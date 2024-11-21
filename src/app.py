@@ -6,7 +6,7 @@ from repositories.book_repository import *
 from repositories.inproceedings_repository import *
 from repositories.article_repository import *
 from config import app, test_env
-from util import validateNotEmpty
+from util import validateNotEmpty, validateLength
 
 @app.route("/")
 def index():
@@ -36,6 +36,8 @@ def book_creation():
     #Validate that parameters are not empty, if they are an exception is thrown
     try: 
         validateNotEmpty([key, author, title, year, publisher])
+        #Validate fields being between 1 and 255 characters
+        validateLength([key, author, title, year, publisher], 1, 255)
         create_book(key, author, title, year, publisher)
         return redirect("/")
     except Exception as error:
@@ -56,6 +58,8 @@ def article_creation():
     #Validate that parameters are not empty, if they are an exception is thrown
     try: 
         validateNotEmpty([key, author, title, year, journal])
+        #Validate fields being between 1 and 255 characters
+        validateLength([key, author, title, year, journal], 1, 255)
         create_article(key, author, title, year, journal)
         return redirect("/")
     except Exception as error:
@@ -76,6 +80,8 @@ def inproceedings_creation():
     #Validate that parameters are not empty, if they are an exception is thrown
     try: 
         validateNotEmpty([key, author, title, year, booktitle])
+        #Validate fields being between 1 and 255 characters
+        validateLength([key, author, title, year, booktitle], 1, 255)
         create_inproceedings(key, author, title, year, booktitle)
         return redirect("/")
     except Exception as error:
