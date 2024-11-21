@@ -18,11 +18,21 @@ def table_exists(name):
   result = db.session.execute(sql_table_existence)
   return result.fetchall()[0][0]
 
+#Resets the db without dropping tables
 def reset_db():
-  print(f"Clearing contents from table {table_name}")
-  sql = text(f"DELETE FROM {table_name}")
-  db.session.execute(sql)
-  db.session.commit()
+  for table_name in table_names:
+    print(f"Clearing contents from table {table_name}")
+    sql = text(f"DELETE FROM {table_name}")
+    db.session.execute(sql)
+    db.session.commit()
+
+#Debug function to return the contents of the db
+def print_db():
+  result = []
+  for table_name in table_names:
+    sql = text(f"SELECT * FROM {table_name}")
+    result.append(db.session.execute(sql).fetchall())
+  return result   
 
 def setup_db():
   #Could be cleaner but does the job for now. All the required fields for the mentioned entry type are there. This drops the tables if they exist and then recreates them.
@@ -43,8 +53,8 @@ def setup_db():
         "  key TEXT NOT NULL,"
         "  author TEXT NOT NULL,"
         "  title TEXT NOT NULL,"
-        "  booktitle TEXT NOT NULL,"
-        "  year VARCHAR(4) NOT NULL"
+        "  year VARCHAR(4) NOT NULL,"
+        "  booktitle TEXT NOT NULL"
         ")"
       )
     elif (table_name == "articles"):
@@ -54,8 +64,8 @@ def setup_db():
         "  key TEXT NOT NULL,"
         "  author TEXT NOT NULL,"
         "  title TEXT NOT NULL,"
-        "  journal TEXT NOT NULL,"
-        "  year VARCHAR(4)  NOT NULL"
+        "  year VARCHAR(4) NOT NULL,"
+        "  journal TEXT NOT NULL"
         ")"
       )
     elif (table_name == "books"):
@@ -65,8 +75,8 @@ def setup_db():
         "  key TEXT NOT NULL,"
         "  author TEXT NOT NULL,"
         "  title TEXT NOT NULL,"
-        "  publisher TEXT NOT NULL,"
-        "  year VARCHAR(4) NOT NULL"
+        "  year VARCHAR(4) NOT NULL,"
+        "  publisher TEXT NOT NULL"
         ")"
       )  
     db.session.execute(sql)
