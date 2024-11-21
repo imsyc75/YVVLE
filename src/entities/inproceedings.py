@@ -1,4 +1,4 @@
-class Inproceeding:
+class Inproceedings:
     def __init__(self, id, key, author, title, year, booktitle):
         self.id = id
         self.key = key

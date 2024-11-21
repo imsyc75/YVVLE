@@ -2,7 +2,9 @@ from flask import redirect, render_template, request, jsonify, flash, json
 from db_helper import reset_db, print_db
 
 #Get stuff from book_repository
-from repositories.book_repository import get_books, create_book
+from repositories.book_repository import *
+from repositories.inproceedings_repository import *
+from repositories.article_repository import *
 from config import app, test_env
 from util import validateNotEmpty
 
@@ -19,7 +21,7 @@ def new_article():
     return render_template("new_article.html")
 
 @app.route("/new_inproceedings")
-def new_proceedings():
+def new_inproceedings():
     return render_template("new_inproceedings.html")
 
 #Create new book
@@ -60,11 +62,11 @@ def article_creation():
         #Print the error and put it in a flask flash
         print(str(error))
         flash(str(error))
-        return  redirect("/new_journal")
+        return  redirect("/new_article")
 
-#Create new inproceeding
-@app.route("/create_inproceeding", methods=["POST"])
-def inproceeding_creation():
+#Create new inproceedings
+@app.route("/create_inproceedings", methods=["POST"])
+def inproceedings_creation():
     key = request.form.get("key")
     author = request.form.get("author")
     title = request.form.get("title")
@@ -74,13 +76,13 @@ def inproceeding_creation():
     #Validate that parameters are not empty, if they are an exception is thrown
     try: 
         validateNotEmpty([key, author, title, year, booktitle])
-        create_inproceeding(key, author, title, year, booktitle)
+        create_inproceedings(key, author, title, year, booktitle)
         return redirect("/")
     except Exception as error:
         #Print the error and put it in a flask flash
         print(str(error))
         flash(str(error))
-        return  redirect("/new_inproceeding")
+        return  redirect("/new_inproceedings")
 
 
 #Useful debug functions
