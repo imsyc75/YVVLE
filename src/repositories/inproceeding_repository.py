@@ -3,7 +3,7 @@ from sqlalchemy import text
 
 from entities.inproceeding import Inproceeding
 
-def get_inproceesings():
+def get_inproceedings():
     result = db.session.execute(text("SELECT id, key, author, title, year, booktitle FROM inproceedings"))
     inproceedings = result.fetchall()
     #Return an array of inproceeding objects
