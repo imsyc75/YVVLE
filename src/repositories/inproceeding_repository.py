@@ -6,7 +6,7 @@ from entities.inproceeding import Inproceeding
 def get_inproceesings():
     result = db.session.execute(text("SELECT id, key, author, title, year, booktitle FROM inproceedings"))
     inproceedings = result.fetchall()
-    #Return an array of book objects
+    #Return an array of inproceeding objects
     return [Inproceeding(inproceeding[0], inproceeding[1], inproceeding[2], inproceeding[3], inproceeding[4], inproceeding[5]) for inproceeding in inproceedings] 
 
 #Insert the values to the database created by db_helper.py

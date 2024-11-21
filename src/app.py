@@ -76,7 +76,7 @@ def inproceeding_creation():
 
 
 
-# testausta varten oleva reitti
+# this will clear the database but not drop tables
 if test_env:
     @app.route("/reset_db")
     def reset_database():
