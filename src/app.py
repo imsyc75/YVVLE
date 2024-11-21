@@ -1,5 +1,5 @@
-from flask import redirect, render_template, request, jsonify, flash
-from db_helper import reset_db
+from flask import redirect, render_template, request, jsonify, flash, json
+from db_helper import reset_db, print_db
 
 #Get stuff from book_repository
 from repositories.book_repository import get_books, create_book
@@ -75,10 +75,19 @@ def inproceeding_creation():
         return  redirect("/new_inproceeding")
 
 
-
-# this will clear the database but not drop tables
+#Useful debug functions
+#TEST_ENV=true in .env
 if test_env:
+    # this will clear the database but not drop tables
     @app.route("/reset_db")
     def reset_database():
         reset_db()
         return jsonify({ 'message': "db reset" })
+
+    #This will print the content of the database TODO in proper json format
+    @app.route("/print_db")
+    def print_database():
+        results = print_db()
+        return jsonify(str(results))
+
+        

@@ -26,6 +26,14 @@ def reset_db():
     db.session.execute(sql)
     db.session.commit()
 
+#Debug function to return the contents of the db
+def print_db():
+  result = []
+  for table_name in table_names:
+    sql = text(f"SELECT * FROM {table_name}")
+    result.append(db.session.execute(sql).fetchall())
+  return result   
+
 def setup_db():
   #Could be cleaner but does the job for now. All the required fields for the mentioned entry type are there. This drops the tables if they exist and then recreates them.
   #Listed in here: https://bib-it.sourceforge.net/help/fieldsAndEntryTypes.php
