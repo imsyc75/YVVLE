@@ -1,5 +1,8 @@
 class UserInputError(Exception):
     pass
 
-def validate_book(content):
-    print("TODO")
+#Validator takes an array of params, checks that none of them are empty
+def validateNotEmpty(params):
+    for param in params:
+        if not param:
+            raise ValueError("Fill all fields")
