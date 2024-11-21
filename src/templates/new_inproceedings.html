@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Create a new Reference
+{% endblock %}
+
+{% block body %}
+
+<h2>Create a new reference</h2>
+
+<h3>Here you can add an Inproceedings Reference</h3>
+
+<form action="/create_proceedings" method="post">
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+  <label for="key">Key:</label>
+  <input type="text" name="key"></p>
+  <label for="author">Author:</label>
+  <input type="text" name="author"></p>
+  <label for="title">Title:</label>
+  <input type="text" name="title"></p>
+  <label for="year">Year:</label>
+  <input type="text" name="year"></p>
+  <label for="booktitle">Booktitle:</label>
+  <input type="text" name="booktitle"></p>
+  <br>
+  <button type="submit">
+    Create
+  </button>
+</form>
+
+{% endblock %}

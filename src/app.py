@@ -14,6 +14,14 @@ def index():
 def new():
     return render_template("new_book.html")
 
+@app.route("/new_article")
+def new_article():
+    return render_template("new_article.html")
+
+@app.route("/new_inproceedings")
+def new_proceedings():
+    return render_template("new_inproceedings.html")
+
 #Create new book
 @app.route("/create_book", methods=["POST"])
 def book_creation():
