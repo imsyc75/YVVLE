@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block title %}
+View Article References
+{% endblock %}
+{% block body %}
+
+<h2>Article References</h2>
+
+<div>
+    <a href="/">Back to Home</a>
+</div>
+
+<div>
+    {% if articles %}
+        {% for article in articles %}
+            <div>
+                <p>Key: {{ article.key }}</p>
+                <p>Author: {{ article.author }}</p>
+                <p>Title: {{ article.title }}</p>
+                <p>Year: {{ article.year }}</p>
+                <p>Journal: {{ article.journal }}</p>
+                <hr>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No article references yet.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

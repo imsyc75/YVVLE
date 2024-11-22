@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block title %}
+View Book References
+{% endblock %}
+{% block body %}
+
+<h2>Book References</h2>
+
+<div>
+    <a href="/">Back to Home</a>
+</div>
+
+<div>
+    {% if books %}
+        {% for book in books %}
+            <div>
+                <p>Key: {{ book.key }}</p>
+                <p>Author: {{ book.author }}</p>
+                <p>Title: {{ book.title }}</p>
+                <p>Year: {{ book.year }}</p>
+                <p>Publisher: {{ book.publisher }}</p>
+                <hr>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No book references yet.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

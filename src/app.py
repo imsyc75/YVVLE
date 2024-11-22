@@ -12,17 +12,31 @@ from util import validateNotEmpty, validateLength
 def index():
     return render_template("index.html") 
 
-@app.route("/view_references")
-def view_references():
+@app.route("/view_books")
+def view_books():
     try:
-        books = get_books()  
-        articles = get_articles() 
-        inproceedings = get_inproceedings() 
-        
-        return render_template("view_references.html",
-                             books=books,
-                             articles=articles,
-                             inproceedings=inproceedings)
+        books = get_books()
+        return render_template("view_books.html", books=books)
+    except Exception as error:
+        print(str(error))
+        flash(str(error))
+        return redirect("/")
+
+@app.route("/view_articles")
+def view_articles():
+    try:
+        articles = get_articles()
+        return render_template("view_articles.html", articles=articles)
+    except Exception as error:
+        print(str(error))
+        flash(str(error))
+        return redirect("/")
+
+@app.route("/view_inproceedings")
+def view_inproceedings():
+    try:
+        inproceedings = get_inproceedings()
+        return render_template("view_inproceedings.html", inproceedings=inproceedings)
     except Exception as error:
         print(str(error))
         flash(str(error))

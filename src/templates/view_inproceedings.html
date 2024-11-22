@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block title %}
+View Inproceedings References
+{% endblock %}
+{% block body %}
+
+<h2>Inproceedings References</h2>
+
+<div>
+    <a href="/">Back to Home</a>
+</div>
+
+<div>
+    {% if inproceedings %}
+        {% for inproceeding in inproceedings %}
+            <div>
+                <p>Key: {{ inproceeding.key }}</p>
+                <p>Author: {{ inproceeding.author }}</p>
+                <p>Title: {{ inproceeding.title }}</p>
+                <p>Year: {{ inproceeding.year }}</p>
+                <p>Booktitle: {{ inproceeding.booktitle }}</p>
+                <hr>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No inproceedings references yet.</p>
+    {% endif %}
+</div>
+
+{% endblock %}
