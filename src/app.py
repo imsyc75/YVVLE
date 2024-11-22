@@ -12,6 +12,22 @@ from util import validateNotEmpty, validateLength
 def index():
     return render_template("index.html") 
 
+@app.route("/view_references")
+def view_references():
+    try:
+        books = get_books()  
+        articles = get_articles() 
+        inproceedings = get_inproceedings() 
+        
+        return render_template("view_references.html",
+                             books=books,
+                             articles=articles,
+                             inproceedings=inproceedings)
+    except Exception as error:
+        print(str(error))
+        flash(str(error))
+        return redirect("/")
+
 @app.route("/new_book")
 def new():
     return render_template("new_book.html")
