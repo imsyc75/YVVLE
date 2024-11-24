@@ -1,3 +1,4 @@
+import os
 
 from repositories.book_repository import get_books, Book
 from repositories.article_repository import get_articles, Article
@@ -6,6 +7,10 @@ from repositories.inproceedings_repository import get_inproceedings, Inproceedin
 # Parsing assumes there are all of the expected parameters
 
 def parse_to_file():
+    dir_name = 'src/downloadables'
+    if (not os.path.exists(dir_name)):
+        os.mkdir(dir_name)
+
     output = ''
 
     books = get_books()
