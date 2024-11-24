@@ -14,11 +14,17 @@ View Article References
     {% if articles %}
         {% for article in articles %}
             <div>
-                <p>Key: {{ article.key }}</p>
-                <p>Author: {{ article.author }}</p>
-                <p>Title: {{ article.title }}</p>
-                <p>Year: {{ article.year }}</p>
-                <p>Journal: {{ article.journal }}</p>
+                <p>Key: {{ article[0].key }}</p>
+                <p>Author: {{ article[0].author }}</p>
+                <p>Title: {{ article[0].title }}</p>
+                <p>Year: {{ article[0].year }}</p>
+                <p>Journal: {{ article[0].journal }}</p>
+                <br>
+                <p>{{ article[1] }}</p>
+                {% for line in article[2] %}
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;{{ line }}</p>
+                {% endfor %}
+                <p>{{ article[3] }}</p>
                 <hr>
             </div>
         {% endfor %}

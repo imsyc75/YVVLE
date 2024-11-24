@@ -5,11 +5,9 @@ from repositories.inproceedings_repository import get_inproceedings, Inproceedin
 
 # Keys should be unique!
 
-# Parses the references into a bibtex file called 'references.bib'
-
 # Parsing assumes there are all of the expected parameters
 
-def parse():
+def parse_to_file():
     output = ''
 
     books = get_books()
@@ -27,6 +25,36 @@ def parse():
 
     with open("references.bib", "w") as file:
         file.write(output)
+
+def parse_books_to_list():
+    output = []
+
+    books = get_books()
+
+    for book in books:
+        output.append(parse_book(book))
+
+    return output
+
+def parse_articles_to_list():
+    output = []
+
+    articles = get_articles()
+
+    for article in articles:
+        output.append(parse_article(article))
+
+    return output
+
+def parse_inproceedings_to_list():
+    output = []
+
+    inprocs = get_inproceedings()
+
+    for inproc in inprocs:
+        output.append(parse_inproceedings(inproc))
+
+    return output
 
 def parse_book(book : Book):
     return f"""@book{'{'}{book.key},

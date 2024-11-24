@@ -8,6 +8,8 @@ from repositories.article_repository import *
 from config import app, test_env
 from util import validateNotEmpty, validateLength
 
+import bibtex_parser
+
 @app.route("/")
 def index():
     return render_template("index.html") 
@@ -16,7 +18,14 @@ def index():
 def view_books():
     try:
         books = get_books()
-        return render_template("view_books.html", books=books)
+        parsed_books = bibtex_parser.parse_books_to_list()
+        
+        books_tuple = []
+        for i in range(len(books)):
+            lines = parsed_books[i].split('\n')
+            books_tuple.append((books[i], lines[0], lines[1:(len(lines) - 1)], lines[-1]))
+
+        return render_template("view_books.html", books=books_tuple)
     except Exception as error:
         print(str(error))
         flash(str(error))
@@ -26,7 +35,14 @@ def view_books():
 def view_articles():
     try:
         articles = get_articles()
-        return render_template("view_articles.html", articles=articles)
+        parsed_articles = bibtex_parser.parse_articles_to_list()
+        
+        articles_tuple = []
+        for i in range(len(articles)):
+            lines = parsed_articles[i].split('\n')
+            articles_tuple.append((articles[i], lines[0], lines[1:(len(lines) - 1)], lines[-1]))
+
+        return render_template("view_articles.html", articles=articles_tuple)
     except Exception as error:
         print(str(error))
         flash(str(error))
@@ -36,7 +52,14 @@ def view_articles():
 def view_inproceedings():
     try:
         inproceedings = get_inproceedings()
-        return render_template("view_inproceedings.html", inproceedings=inproceedings)
+        parsed_inprocs = bibtex_parser.parse_inproceedings_to_list()
+        
+        inprocs_tuple = []
+        for i in range(len(inproceedings)):
+            lines = parsed_inprocs[i].split('\n')
+            inprocs_tuple.append((inproceedings[i], lines[0], lines[1:(len(lines) - 1)], lines[-1]))
+
+        return render_template("view_inproceedings.html", inproceedings=inprocs_tuple)
     except Exception as error:
         print(str(error))
         flash(str(error))

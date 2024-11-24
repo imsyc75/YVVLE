@@ -14,11 +14,17 @@ View Book References
     {% if books %}
         {% for book in books %}
             <div>
-                <p>Key: {{ book.key }}</p>
-                <p>Author: {{ book.author }}</p>
-                <p>Title: {{ book.title }}</p>
-                <p>Year: {{ book.year }}</p>
-                <p>Publisher: {{ book.publisher }}</p>
+                <p>Key: {{ book[0].key }}</p>
+                <p>Author: {{ book[0].author }}</p>
+                <p>Title: {{ book[0].title }}</p>
+                <p>Year: {{ book[0].year }}</p>
+                <p>Publisher: {{ book[0].publisher }}</p>
+                <br>
+                <p>{{ book[1] }}</p>
+                {% for line in book[2] %}
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;{{ line }}</p>
+                {% endfor %}
+                <p>{{ book[3] }}</p>
                 <hr>
             </div>
         {% endfor %}

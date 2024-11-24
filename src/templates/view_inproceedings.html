@@ -14,11 +14,17 @@ View Inproceedings References
     {% if inproceedings %}
         {% for inproceeding in inproceedings %}
             <div>
-                <p>Key: {{ inproceeding.key }}</p>
-                <p>Author: {{ inproceeding.author }}</p>
-                <p>Title: {{ inproceeding.title }}</p>
-                <p>Year: {{ inproceeding.year }}</p>
-                <p>Booktitle: {{ inproceeding.booktitle }}</p>
+                <p>Key: {{ inproceeding[0].key }}</p>
+                <p>Author: {{ inproceeding[0].author }}</p>
+                <p>Title: {{ inproceeding[0].title }}</p>
+                <p>Year: {{ inproceeding[0].year }}</p>
+                <p>Booktitle: {{ inproceeding[0].booktitle }}</p>
+                <br>
+                <p>{{ inproceeding[1] }}</p>
+                {% for line in inproceeding[2] %}
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;{{ line }}</p>
+                {% endfor %}
+                <p>{{ inproceeding[3] }}</p>
                 <hr>
             </div>
         {% endfor %}
