@@ -1,4 +1,4 @@
-from flask import redirect, render_template, request, jsonify, flash, json
+from flask import redirect, render_template, request, jsonify, flash, json, send_file
 from db_helper import reset_db, print_db
 
 #Get stuff from book_repository
@@ -159,4 +159,8 @@ if test_env:
         results = print_db()
         return jsonify(str(results))
 
-        
+@app.route('/download')
+def download():
+    bibtex_parser.parse_to_file()
+    path = 'downloadables/references.bib'
+    return send_file(path, as_attachment=True)

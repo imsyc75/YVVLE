@@ -3,8 +3,6 @@ from repositories.book_repository import get_books, Book
 from repositories.article_repository import get_articles, Article
 from repositories.inproceedings_repository import get_inproceedings, Inproceedings
 
-# Keys should be unique!
-
 # Parsing assumes there are all of the expected parameters
 
 def parse_to_file():
@@ -23,7 +21,7 @@ def parse_to_file():
     for inpro in inprocs:
         output += parse_inproceedings(inpro) + "\n\n"
 
-    with open("references.bib", "w") as file:
+    with open("src/downloadables/references.bib", "w") as file:
         file.write(output)
 
 def parse_books_to_list():
