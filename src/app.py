@@ -1,12 +1,11 @@
 from flask import redirect, render_template, request, jsonify, flash, json, send_file
 from db_helper import reset_db, print_db
 
-#Get stuff from book_repository
 from repositories.book_repository import *
 from repositories.inproceedings_repository import *
 from repositories.article_repository import *
 from config import app, test_env
-from util import validateNotEmpty, validateLength
+from util import validate_not_empty, validate_length, validate_key
 
 import bibtex_parser
 
@@ -77,7 +76,6 @@ def new_article():
 def new_inproceedings():
     return render_template("new_inproceedings.html")
 
-#Create new book
 @app.route("/create_book", methods=["POST"])
 def book_creation():
     key = request.form.get("key")
@@ -86,20 +84,18 @@ def book_creation():
     year = request.form.get("year")
     publisher = request.form.get("publisher")
 
-    #Validate that parameters are not empty, if they are an exception is thrown
     try: 
-        validateNotEmpty([key, author, title, year, publisher])
-        #Validate fields being between 1 and 255 characters
-        validateLength([key, author, title, year, publisher], 1, 255)
+        validate_not_empty([key, author, title, year, publisher])
+        validate_length([key, author, title, year, publisher], 1, 255)
+        validate_key(key, get_book_keys())
         create_book(key, author, title, year, publisher)
         return redirect("/")
+        
     except Exception as error:
-        #Print the error and put it in a flask flash
         print(str(error))
         flash(str(error))
         return  redirect("/new_book")
 
-#Create new article
 @app.route("/create_article", methods=["POST"])
 def article_creation():
     key = request.form.get("key")
@@ -108,20 +104,18 @@ def article_creation():
     year = request.form.get("year")
     journal = request.form.get("journal")
 
-    #Validate that parameters are not empty, if they are an exception is thrown
     try: 
-        validateNotEmpty([key, author, title, year, journal])
-        #Validate fields being between 1 and 255 characters
-        validateLength([key, author, title, year, journal], 1, 255)
+        validate_not_empty([key, author, title, year, journal])
+        validate_length([key, author, title, year, journal], 1, 255)
+        validate_key(key, get_article_keys())
         create_article(key, author, title, year, journal)
         return redirect("/")
+
     except Exception as error:
-        #Print the error and put it in a flask flash
         print(str(error))
         flash(str(error))
         return  redirect("/new_article")
 
-#Create new inproceedings
 @app.route("/create_inproceedings", methods=["POST"])
 def inproceedings_creation():
     key = request.form.get("key")
@@ -130,18 +124,22 @@ def inproceedings_creation():
     year = request.form.get("year")
     booktitle = request.form.get("booktitle")
 
-    #Validate that parameters are not empty, if they are an exception is thrown
     try: 
-        validateNotEmpty([key, author, title, year, booktitle])
-        #Validate fields being between 1 and 255 characters
-        validateLength([key, author, title, year, booktitle], 1, 255)
+        validate_not_empty([key, author, title, year, booktitle])
+        validate_length([key, author, title, year, booktitle], 1, 255)
+        validate_key(key, get_inproceedings_keys())
         create_inproceedings(key, author, title, year, booktitle)
         return redirect("/")
     except Exception as error:
-        #Print the error and put it in a flask flash
         print(str(error))
         flash(str(error))
         return  redirect("/new_inproceedings")
+
+@app.route('/download')
+def download():
+    bibtex_parser.parse_to_file()
+    path = 'downloadables/references.bib'
+    return send_file(path, as_attachment=True)
 
 
 #Useful debug functions
@@ -158,9 +156,3 @@ if test_env:
     def print_database():
         results = print_db()
         return jsonify(str(results))
-
-@app.route('/download')
-def download():
-    bibtex_parser.parse_to_file()
-    path = 'downloadables/references.bib'
-    return send_file(path, as_attachment=True)

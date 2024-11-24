@@ -9,7 +9,11 @@ def get_books():
     #Return an array of book objects
     return [Book(book[0], book[1], book[2], book[3], book[4], book[5]) for book in books] 
 
-#Insert the values to the database created by db_helper.py
+def get_book_keys():
+    result = db.session.execute(text("SELECT key FROM books"))
+    keys = result.fetchall()
+    return [key[0] for key in keys]
+
 def create_book(key, author, title, year, publisher):
     sql = text("INSERT INTO books (key, author, title, year, publisher) VALUES (:key, :author, :title, :year, :publisher)")
     db.session.execute(sql, { "key":key, "author":author, "title":title, "year":year, "publisher":publisher })
