@@ -87,7 +87,7 @@ def book_creation():
     try: 
         validate_not_empty([key, author, title, year, publisher])
         validate_length([key, author, title, year, publisher], 1, 255)
-        validate_key(key, get_book_keys())
+        validate_key(key, get_book_keys() + get_article_keys() + get_inproceedings_keys())
         create_book(key, author, title, year, publisher)
         return redirect("/")
         
@@ -107,7 +107,7 @@ def article_creation():
     try: 
         validate_not_empty([key, author, title, year, journal])
         validate_length([key, author, title, year, journal], 1, 255)
-        validate_key(key, get_article_keys())
+        validate_key(key, get_book_keys() + get_article_keys() + get_inproceedings_keys())
         create_article(key, author, title, year, journal)
         return redirect("/")
 
@@ -127,7 +127,7 @@ def inproceedings_creation():
     try: 
         validate_not_empty([key, author, title, year, booktitle])
         validate_length([key, author, title, year, booktitle], 1, 255)
-        validate_key(key, get_inproceedings_keys())
+        validate_key(key, get_book_keys() + get_article_keys() + get_inproceedings_keys())
         create_inproceedings(key, author, title, year, booktitle)
         return redirect("/")
     except Exception as error:
