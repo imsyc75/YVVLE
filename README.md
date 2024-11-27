@@ -37,7 +37,7 @@ python src/index.py
 
 Use the following command to execute the robot tests:
 ```python
-robot --include create --include create2 src/story_tests
+robot src/story_tests
 ```
 
 
