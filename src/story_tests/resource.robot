@@ -25,8 +25,11 @@ Open And Configure Browser
     END
     Open Browser  browser=${BROWSER}  options=${options}
 
-Reset Todos
+Reset Db
     Go To  ${RESET_URL}
+
+Go To Starting Page
+    Go To  ${HOME_URL}
 
 Create Page Should Be Open
     Title Should Be  Create a new Reference
@@ -34,6 +37,7 @@ Create Page Should Be Open
 Starting Page Should Be Open
     Page Should Contain  Welcome to BibTex References
 
-Go To Starting Page
+Reset Db And Go To Starting Page
+    Reset Db
     Go To  ${HOME_URL}
 
