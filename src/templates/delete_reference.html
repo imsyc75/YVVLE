@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% block title %}
+Delete References
+{% endblock %}
+{% block body %}
+
+<div>
+    <a href="/">Back to Home</a>
+</div>
+
+
+<h2>References</h2>
+
+<form action="/del_references" method="post">
+
+<b>Select Book to be deleted:</b>
+    {% if books %}
+        {% for book in books %}
+            <ul>
+                <input type="radio" name="book" value="{{ book.key }}"> Key: {{ book.key }} ({{ book.author }}, {{ book.title }}, {{ book.year }}, {{ book.publisher }})</p>
+            </ul>
+        {% endfor %}
+    {% else %}
+            <ul>
+                <li>No book references yet.</li>
+            </ul>
+    {% endif %}
+<b>Select Article to be deleted:</b>
+    {% if articles %}
+        {% for article in articles %}
+            <ul>
+                <input type="radio" name="article" value="{{ article.key }}"> Key: {{ article.key }} ({{ article.author }}, {{article.title }}, {{ article.year }}, {{ article.journal }})</p>
+            </ul>
+        {% endfor %}
+    {% else %}
+            <ul>
+                <li>No article references yet.</li>
+            </ul>
+    {% endif %}
+<b>Select Inproceedings to be deleted:</b>
+    {% if inproceedings %}
+        {% for inproceeding in inproceedings %}
+            <ul>
+                <input type="radio" name="inproceeding" value="{{ inproceeding.key }}"> Key: {{ inproceeding.key }} ({{ inproceeding.author }}, {{ inproceeding.title }}, {{ inproceeding.year }}, {{ inproceeding.booktitle }})</p>
+            </ul>
+        {% endfor %}
+    {% else %}
+            <ul>
+                <li>No inproceedings references yet.</li>
+            </ul>
+    {% endif %}
+
+<br>
+<button type="submit">
+  Delete
+</button>
+</form>
+
+{% endblock %}

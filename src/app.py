@@ -141,6 +141,24 @@ def download():
     path = 'downloadables/references.bib'
     return send_file(path, as_attachment=True)
 
+@app.route("/delete_reference")
+def delete_reference():
+    books = get_books()
+    articles = get_articles()
+    inproceedings = get_inproceedings()
+    books_tuple = []
+    for i in range(len(books)):
+        books_tuple.append(books[i])
+    inprocs_tuple = []
+    for i in range(len(inproceedings)):
+        inprocs_tuple.append(inproceedings[i])
+    articles_tuple = []
+    for i in range(len(articles)):
+        articles_tuple.append(articles[i])
+
+    return render_template("delete_reference.html", books=books_tuple, articles=articles_tuple, inproceedings=inprocs_tuple)
+
+
 
 #Useful debug functions
 #TEST_ENV=true in .env
