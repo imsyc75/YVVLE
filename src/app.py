@@ -158,7 +158,9 @@ def delete_reference():
 
     return render_template("delete_reference.html", books=books_tuple, articles=articles_tuple, inproceedings=inprocs_tuple)
 
-
+@app.route("/doi")
+def doi():
+    return render_template("doi.html")
 
 #Useful debug functions
 #TEST_ENV=true in .env

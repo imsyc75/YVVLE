@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Upload DOI reference
+{% endblock %}
+
+{% block body %}
+
+<h2>Upload DOI reference</h2>
+
+<h3>Here you can add DOI Reference</h3>
+
+<div>
+  <a href="/">Back to Home</a>
+</div>
+</p>
+<form action="/upload_doi" method="post">
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+  <label for="doi">DOI:</label>
+  <input type="text" name="doi"></p>
+
+  <br>
+  <button type="submit">
+    Upload
+  </button>
+</form>
+
+{% endblock %}
