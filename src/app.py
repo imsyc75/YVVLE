@@ -7,6 +7,7 @@ from repositories.article_repository import *
 from config import app, test_env
 from util import validate_not_empty, validate_length, validate_key
 
+import random, requests
 import bibtex_parser
 import doi_importer
 
@@ -159,6 +160,26 @@ def delete_reference():
 
     return render_template("delete_reference.html", books=books_tuple, articles=articles_tuple, inproceedings=inprocs_tuple)
 
+@app.route("/del_references", methods=["POST"])
+def del_references():
+    books = request.form.getlist("books")
+    articles = request.form.getlist("articles")
+    inproceedings = request.form.getlist("inproceedings")
+    
+    try: 
+        for book in books:       
+            delete_book(book)
+        for article in articles:       
+            delete_article(article)
+        for inproceeding in inproceedings:       
+            delete_inproceedings(inproceeding)
+
+    except Exception as error:
+        print(str(error))
+        flash(str(error))
+
+    return redirect("/delete_reference")
+
 @app.route("/doi")
 def doi():
     return render_template("doi.html")
@@ -189,10 +210,33 @@ if test_env:
     @app.route("/reset_db")
     def reset_database():
         reset_db()
-        return jsonify({ 'message': "db reset" })
+        flash("DB RESET")
+        return  redirect("/")   
 
     #This will print the content of the database TODO in proper json format
     @app.route("/print_db")
     def print_database():
         results = print_db()
         return jsonify(str(results))
+
+    #This will fill the database with random stuff using words from the 5000 word dictionary. E.g. 127.0.0.1:5001/fill_db=99 will create 33 books, 33 articles and 33 inproceedings
+    @app.route("/fill_db=<item_amount>")
+    def fill_database(item_amount):
+        word_site = "https://raw.githubusercontent.com/MichaelWehar/Public-Domain-Word-Lists/master/5000-more-common.txt"
+
+        response = requests.get(word_site, verify=True)
+        WORDS = response.text.splitlines()
+
+        for i in range(int(item_amount)):
+            try: 
+                if i%3 == 0:
+                    create_book(WORDS[i*4], WORDS[i*4+1], WORDS[i*4+2], random.randint(1, 2024), WORDS[i*4+3])
+                elif i%3 == 1:
+                    create_article(WORDS[i*4], WORDS[i*4+1], WORDS[i*4+2], random.randint(1, 2024), WORDS[i*4+3]) 
+                elif i%3 == 2:
+                    create_inproceedings(WORDS[i*4], WORDS[i*4+1], WORDS[i*4+2], random.randint(1, 2024), WORDS[i*4+3])       
+            except Exception as error:
+                print(str(error))
+                flash(str(error))
+
+        return  redirect("/")         

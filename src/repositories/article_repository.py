@@ -19,4 +19,8 @@ def create_article(key, author, title, year, journal):
     db.session.execute(sql, { "key":key, "author":author, "title":title, "year":year, "journal":journal })
     db.session.commit()
 
-    
+def delete_article(key):
+    sql = text("DELETE FROM articles WHERE key=:key")
+    db.session.execute(sql, { "key":key })
+    db.session.commit()    
+    print("Deleted article " + key)   

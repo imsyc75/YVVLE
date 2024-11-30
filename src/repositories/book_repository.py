@@ -19,4 +19,8 @@ def create_book(key, author, title, year, publisher):
     db.session.execute(sql, { "key":key, "author":author, "title":title, "year":year, "publisher":publisher })
     db.session.commit()
 
-    
+def delete_book(key):
+    sql = text("DELETE FROM books WHERE key=:key")
+    db.session.execute(sql, { "key":key })
+    db.session.commit()    
+    print("Deleted book " + key)

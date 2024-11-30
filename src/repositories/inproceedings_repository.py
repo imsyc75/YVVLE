@@ -19,4 +19,8 @@ def create_inproceedings(key, author, title, year, booktitle):
     db.session.execute(sql, { "key":key, "author":author, "title":title, "year":year, "booktitle":booktitle })
     db.session.commit()
 
-    
+def delete_inproceedings(key):
+    sql = text("DELETE FROM inproceedings WHERE key=:key")
+    db.session.execute(sql, { "key":key })
+    db.session.commit()    
+    print("Deleted inproceedings " + key)      
