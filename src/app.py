@@ -8,6 +8,7 @@ from config import app, test_env
 from util import validate_not_empty, validate_length, validate_key
 
 import bibtex_parser
+import doi_importer
 
 @app.route("/")
 def index():
@@ -161,6 +162,25 @@ def delete_reference():
 @app.route("/doi")
 def doi():
     return render_template("doi.html")
+
+@app.route("/upload_doi", methods=['POST'])
+def process_doi():
+    link = request.form.get("doi")
+    data = doi_importer.convert_doi(link)
+
+    key = 'temp'
+    
+    try: 
+        if (data == None):
+            raise Exception("Incorrect doi or reference type")
+        validate_key(key, get_book_keys() + get_article_keys() + get_inproceedings_keys())
+        create_article(key, data[1]['author'], data[1]['title'], data[1]['year'], data[1]['journal'])
+        return redirect("/")
+    except Exception as error:
+        print(str(error))
+        flash(str(error))
+        return  redirect("/doi")
+
 
 #Useful debug functions
 #TEST_ENV=true in .env
