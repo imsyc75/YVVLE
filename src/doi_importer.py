@@ -53,6 +53,9 @@ def fetchmeta(doi, fmt='dict', **kwargs):
     return out
 
 def convert_doi(doi_link : str):
+    if (len(doi_link) == 0 or doi_link.find('doi.org/') == -1):
+        raise Exception("Invalid doi")
+
     doi = doi_link.split('doi.org/')[1]
     meta = fetchmeta(doi, fmt = 'bibtex')
 

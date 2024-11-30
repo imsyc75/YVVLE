@@ -187,20 +187,36 @@ def doi():
 @app.route("/upload_doi", methods=['POST'])
 def process_doi():
     link = request.form.get("doi")
-    data = doi_importer.convert_doi(link)
-
-    key = 'temp'
     
-    try: 
+    try:
+        data = doi_importer.convert_doi(link)
         if (data == None):
             raise Exception("Incorrect doi or reference type")
+        return render_template("review_doi.html", data=data)
+    except Exception as error:
+        print(str(error))
+        flash(str(error))
+        return  redirect("/doi")
+
+@app.route("/add_doi", methods=['POST'])
+def add_doi():
+    type = request.form.get("type")
+    key = request.form.get("key")
+
+    try:
         validate_key(key, get_book_keys() + get_article_keys() + get_inproceedings_keys())
-        create_article(key, data[1]['author'], data[1]['title'], data[1]['year'], data[1]['journal'])
+        if (type == 'article'):
+            author = request.form.get("author")
+            title = request.form.get("title")
+            year = request.form.get("year")
+            journal = request.form.get("journal")
+            create_article(key, author, title, year, journal)
         return redirect("/")
     except Exception as error:
         print(str(error))
         flash(str(error))
         return  redirect("/doi")
+
 
 
 #Useful debug functions

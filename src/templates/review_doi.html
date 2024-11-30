@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Review DOI reference
+{% endblock %}
+
+{% block body %}
+
+<div>
+  <a href="/">Back to Home</a>
+</div>
+<div>
+  <a href="/doi">Change DOI</a>
+</div>
+
+<form action="/add_doi" method="post">
+  <h3>Found {{ data[0] }} reference with fields:</h3>
+  <input type="hidden" name="type" value="{{ data[0] }}">
+  {% for field_key in data[1].keys() %}
+      <p>{{ field_key }}:</p>
+      <input type="text" name="{{ field_key }}" value="{{ data[1][field_key] }}" size="255">
+  {% endfor %}
+  <br><br>
+  <label for="key">Add a key:</label>
+  <input type="text" name="key"></p>
+
+  <br>
+  <button type="submit">
+    Add
+  </button>
+</form>
+
+{% endblock %}
