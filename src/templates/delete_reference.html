@@ -17,7 +17,7 @@ Delete References
     {% if books %}
         {% for book in books %}
             <ul>
-                <input type="checkbox" name="book" value="{{ book.key }}"> Key: {{ book.key }} ({{ book.author }}, {{ book.title }}, {{ book.year }}, {{ book.publisher }})</p>
+                <input type="checkbox" name="books" value="{{ book.key }}"> Key: {{ book.key }} ({{ book.author }}, {{ book.title }}, {{ book.year }}, {{ book.publisher }})</p>
             </ul>
         {% endfor %}
     {% else %}
@@ -29,7 +29,7 @@ Delete References
     {% if articles %}
         {% for article in articles %}
             <ul>
-                <input type="checkbox" name="article" value="{{ article.key }}"> Key: {{ article.key }} ({{ article.author }}, {{article.title }}, {{ article.year }}, {{ article.journal }})</p>
+                <input type="checkbox" name="articles" value="{{ article.key }}"> Key: {{ article.key }} ({{ article.author }}, {{article.title }}, {{ article.year }}, {{ article.journal }})</p>
             </ul>
         {% endfor %}
     {% else %}
@@ -41,7 +41,7 @@ Delete References
     {% if inproceedings %}
         {% for inproceeding in inproceedings %}
             <ul>
-                <input type="checkbox" name="inproceeding" value="{{ inproceeding.key }}"> Key: {{ inproceeding.key }} ({{ inproceeding.author }}, {{ inproceeding.title }}, {{ inproceeding.year }}, {{ inproceeding.booktitle }})</p>
+                <input type="checkbox" name="inproceedings" value="{{ inproceeding.key }}"> Key: {{ inproceeding.key }} ({{ inproceeding.author }}, {{ inproceeding.title }}, {{ inproceeding.year }}, {{ inproceeding.booktitle }})</p>
             </ul>
         {% endfor %}
     {% else %}

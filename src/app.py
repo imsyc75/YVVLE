@@ -159,6 +159,26 @@ def delete_reference():
 
     return render_template("delete_reference.html", books=books_tuple, articles=articles_tuple, inproceedings=inprocs_tuple)
 
+@app.route("/del_references", methods=["POST"])
+def del_references():
+    books = request.form.getlist("books")
+    articles = request.form.getlist("articles")
+    inproceedings = request.form.getlist("inproceedings")
+    
+    try: 
+        for book in books:       
+            delete_book(book)
+        for article in articles:       
+            delete_article(article)
+        for inproceeding in inproceedings:       
+            delete_inproceedings(inproceeding)
+
+    except Exception as error:
+        print(str(error))
+        flash(str(error))
+
+    return redirect("/delete_reference")
+
 @app.route("/doi")
 def doi():
     return render_template("doi.html")
@@ -198,5 +218,5 @@ if test_env:
             except Exception as error:
                 print(str(error))
                 flash(str(error))
-                
+
         return  redirect("/")         

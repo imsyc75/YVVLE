@@ -15,15 +15,6 @@ Create a new Reference
 </div>
 
 <form action="/create_book" method="post">
-  {% with messages = get_flashed_messages() %}
-    {% if messages %}
-      <ul>
-      {% for message in messages %}
-        <li>{{ message }}</li>
-      {% endfor %}
-      </ul>
-    {% endif %}
-  {% endwith %}
   <label for="key">Key:</label>
   <input type="text" name="key"></p>
   <label for="author">Author:</label>

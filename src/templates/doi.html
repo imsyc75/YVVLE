@@ -15,15 +15,6 @@ Upload DOI reference
 </div>
 </p>
 <form action="/upload_doi" method="post">
-  {% with messages = get_flashed_messages() %}
-    {% if messages %}
-      <ul>
-      {% for message in messages %}
-        <li>{{ message }}</li>
-      {% endfor %}
-      </ul>
-    {% endif %}
-  {% endwith %}
   <label for="doi">DOI:</label>
   <input type="text" name="doi"></p>
 
