@@ -1,6 +1,5 @@
-from config import db
 from sqlalchemy import text
-
+from config import db
 from entities.book import Book
 from util import validate
 
@@ -8,7 +7,7 @@ def get_books():
     result = db.session.execute(text("SELECT id, key, author, title, year, publisher FROM books"))
     books = result.fetchall()
     #Return an array of book objects
-    return [Book(book[0], book[1], book[2], book[3], book[4], book[5]) for book in books] 
+    return [Book(book[0], book[1], book[2], book[3], book[4], book[5]) for book in books]
 
 def create_book(key, author, title, year, publisher):
     validate([key, author, title, year, publisher])
@@ -20,5 +19,5 @@ def create_book(key, author, title, year, publisher):
 def delete_book(key):
     sql = text("DELETE FROM books WHERE key=:key")
     db.session.execute(sql, { "key":key })
-    db.session.commit()    
+    db.session.commit()
     print("Deleted book " + key)
