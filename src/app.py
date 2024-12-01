@@ -258,13 +258,13 @@ if test_env:
             try:
                 if i % 3 == 0:
                     create_book(words[i*4], words[i*4+1], words[i*4+2],
-                                random.randint(1, 2024), words[i*4+3])
+                                str(random.randint(1, 2024)), words[i*4+3])
                 elif i % 3 == 1:
                     create_article(
-                        words[i*4], words[i*4+1], words[i*4+2], random.randint(1, 2024), words[i*4+3])
+                        words[i*4], words[i*4+1], words[i*4+2], str(random.randint(1, 2024)), words[i*4+3])
                 elif i % 3 == 2:
                     create_inproceedings(
-                        words[i*4], words[i*4+1], words[i*4+2], random.randint(1, 2024), words[i*4+3])
+                        words[i*4], words[i*4+1], words[i*4+2], str(random.randint(1, 2024)), words[i*4+3])
             except Exception as error:
                 print(str(error))
                 flash(str(error))
