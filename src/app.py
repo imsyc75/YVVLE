@@ -5,7 +5,6 @@ from repositories.book_repository import *
 from repositories.inproceedings_repository import *
 from repositories.article_repository import *
 from config import app, test_env
-from util import validate_not_empty, validate_length, validate_key
 
 import random, requests
 import bibtex_parser
@@ -87,9 +86,6 @@ def book_creation():
     publisher = request.form.get("publisher")
 
     try: 
-        validate_not_empty([key, author, title, year, publisher])
-        validate_length([key, author, title, year, publisher], 1, 255)
-        validate_key(key, get_book_keys() + get_article_keys() + get_inproceedings_keys())
         create_book(key, author, title, year, publisher)
         return redirect("/")
         
@@ -107,9 +103,6 @@ def article_creation():
     journal = request.form.get("journal")
 
     try: 
-        validate_not_empty([key, author, title, year, journal])
-        validate_length([key, author, title, year, journal], 1, 255)
-        validate_key(key, get_book_keys() + get_article_keys() + get_inproceedings_keys())
         create_article(key, author, title, year, journal)
         return redirect("/")
 
@@ -127,9 +120,6 @@ def inproceedings_creation():
     booktitle = request.form.get("booktitle")
 
     try: 
-        validate_not_empty([key, author, title, year, booktitle])
-        validate_length([key, author, title, year, booktitle], 1, 255)
-        validate_key(key, get_book_keys() + get_article_keys() + get_inproceedings_keys())
         create_inproceedings(key, author, title, year, booktitle)
         return redirect("/")
     except Exception as error:
@@ -204,13 +194,13 @@ def add_doi():
     key = request.form.get("key")
 
     try:
-        validate_key(key, get_book_keys() + get_article_keys() + get_inproceedings_keys())
         if (type == 'article'):
             author = request.form.get("author")
             title = request.form.get("title")
             year = request.form.get("year")
             journal = request.form.get("journal")
             create_article(key, author, title, year, journal)
+        
         return redirect("/")
     except Exception as error:
         print(str(error))

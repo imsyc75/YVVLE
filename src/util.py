@@ -1,3 +1,5 @@
+from repositories.repository_manager import get_all_keys
+
 class UserInputError(Exception):
     pass
 
@@ -15,8 +17,13 @@ def validate_length(params, min, max):
         if len(param) < min:
             raise ValueError("Field too shot")    
 
-def validate_key(key, keys):
+def validate_key(key):
+    keys = get_all_keys()
     for k in keys:
-        print(k)
         if k==key:
             raise ValueError("Key already in use")
+        
+def validate(params : list):
+    validate_not_empty(params)
+    validate_length(params, 1, 255)
+    validate_key(params[0])
