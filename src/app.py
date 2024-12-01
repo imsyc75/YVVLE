@@ -3,9 +3,9 @@ import requests
 from flask import redirect, render_template, request, jsonify, flash, send_file
 from db_helper import reset_db, print_db
 
-from repositories.book_repository import get_books, get_book_keys, create_book, delete_book
-from repositories.inproceedings_repository import get_inproceedings, get_inproceedings_keys, create_inproceedings, delete_inproceedings
-from repositories.article_repository import get_articles, get_article_keys, create_article, delete_article
+from repositories.book_repository import get_books, create_book, delete_book
+from repositories.inproceedings_repository import get_inproceedings, create_inproceedings, delete_inproceedings
+from repositories.article_repository import get_articles, create_article, delete_article
 from config import app, test_env
 
 import bibtex_parser
