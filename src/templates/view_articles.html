@@ -12,24 +12,26 @@ View Article References
 
 <div>
     {% if articles %}
-        {% for article in articles %}
-            <div>
-                <p>Key: {{ article[0].key }}</p>
-                <p>Author: {{ article[0].author }}</p>
-                <p>Title: {{ article[0].title }}</p>
-                <p>Year: {{ article[0].year }}</p>
-                <p>Journal: {{ article[0].journal }}</p>
-                <br>
-                <p>{{ article[1] }}</p>
-                {% for line in article[2] %}
-                    <p>&nbsp;&nbsp;&nbsp;&nbsp;{{ line }}</p>
-                {% endfor %}
-                <p>{{ article[3] }}</p>
-                <hr>
-            </div>
+    {% for article in articles %}
+    <div>
+        Key: {{ article[0].key }}
+        Author: {{ article[0].author }}
+        Title: {{ article[0].title }}
+        Year: {{ article[0].year }}
+        Journal: {{ article[0].journal }}
+
+        {{ article[1] }}
+        {% for line in article[2] %}
+            {{ line }}
         {% endfor %}
+        {{ article[3] }}
+
+        <a href="{{ url_for('edit_article', key=article[0].key) }}" class="button">Edit Reference</a>
+        <hr>
+    </div>
+    {% endfor %}
     {% else %}
-        <p>No article references yet.</p>
+    No article references yet.
     {% endif %}
 </div>
 
