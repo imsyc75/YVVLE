@@ -227,6 +227,104 @@ def add_doi():
         print(str(error))
         flash(str(error))
         return redirect("/doi")
+    
+@app.route("/edit_book/<key>")
+def edit_book(key):
+    try:
+        books = get_books()
+        for book in books:
+            if book[0] == key:  # Assuming key is the first element in the book tuple
+                return render_template("edit_book.html", book=book)
+        flash("Book not found")
+        return redirect("/view_books")
+    except Exception as error:
+        print(str(error))
+        flash(str(error))
+        return redirect("/view_books")
+
+@app.route("/edit_article/<key>")
+def edit_article(key):
+    try:
+        articles = get_articles()
+        for article in articles:
+            if article[0] == key:
+                return render_template("edit_article.html", article=article)
+        flash("Article not found")
+        return redirect("/view_articles")
+    except Exception as error:
+        print(str(error))
+        flash(str(error))
+        return redirect("/view_articles")
+
+@app.route("/edit_inproceedings/<key>")
+def edit_inproceedings(key):
+    try:
+        inproceedings = get_inproceedings()
+        for inproc in inproceedings:
+            if inproc[0] == key:
+                return render_template("edit_inproceedings.html", inproceedings=inproc)
+        flash("Inproceedings not found")
+        return redirect("/view_inproceedings")
+    except Exception as error:
+        print(str(error))
+        flash(str(error))
+        return redirect("/view_inproceedings")
+
+@app.route("/update_book", methods=["POST"])
+def update_book():
+    old_key = request.form.get("old_key")
+    key = request.form.get("key")
+    author = request.form.get("author")
+    title = request.form.get("title")
+    year = request.form.get("year")
+    publisher = request.form.get("publisher")
+
+    try:
+        # First delete the old reference
+        delete_book(old_key)
+        # Then create a new one with updated information
+        create_book(key, author, title, year, publisher)
+        return redirect("/view_books")
+    except Exception as error:
+        print(str(error))
+        flash(str(error))
+        return redirect(f"/edit_book/{old_key}")
+
+@app.route("/update_article", methods=["POST"])
+def update_article():
+    old_key = request.form.get("old_key")
+    key = request.form.get("key")
+    author = request.form.get("author")
+    title = request.form.get("title")
+    year = request.form.get("year")
+    journal = request.form.get("journal")
+
+    try:
+        delete_article(old_key)
+        create_article(key, author, title, year, journal)
+        return redirect("/view_articles")
+    except Exception as error:
+        print(str(error))
+        flash(str(error))
+        return redirect(f"/edit_article/{old_key}")
+
+@app.route("/update_inproceedings", methods=["POST"])
+def update_inproceedings():
+    old_key = request.form.get("old_key")
+    key = request.form.get("key")
+    author = request.form.get("author")
+    title = request.form.get("title")
+    year = request.form.get("year")
+    booktitle = request.form.get("booktitle")
+
+    try:
+        delete_inproceedings(old_key)
+        create_inproceedings(key, author, title, year, booktitle)
+        return redirect("/view_inproceedings")
+    except Exception as error:
+        print(str(error))
+        flash(str(error))
+        return redirect(f"/edit_inproceedings/{old_key}")
 
 
 # Useful debug functions
