@@ -10,15 +10,20 @@ View Article References
     <a href="/">Back to Home</a>
 </div>
 
-<div>
-    {% if articles %}
-    {% for article in articles %}
-    <div>
-        Key: {{ article[0].key }}
-        Author: {{ article[0].author }}
-        Title: {{ article[0].title }}
-        Year: {{ article[0].year }}
-        Journal: {{ article[0].journal }}
+    <div class="list">
+        <hr>
+        {% if articles %}
+        {% for article in articles %}
+        <div class="info">
+            <p>Key: {{ article[0].key }}</p>
+
+            <p>Author: {{ article[0].author }}</p>
+
+            <p>Title: {{ article[0].title }}</p>
+
+            <p>Year: {{ article[0].year }}</p>
+
+            <p>Journal: {{ article[0].journal }}</p>
 
         {{ article[1] }}
         {% for line in article[2] %}
@@ -28,11 +33,10 @@ View Article References
 
         <a href="/edit_article/{{ article[0].key }}" class="button">Edit Reference</a>
         <hr>
+        {% endfor %}
+        {% else %}
+        No article references yet.
+        {% endif %}
     </div>
-    {% endfor %}
-    {% else %}
-    No article references yet.
-    {% endif %}
-</div>
 
 {% endblock %}
