@@ -31,9 +31,6 @@ Reset Db
 Go To Starting Page
     Go To  ${HOME_URL}
 
-Create Page Should Be Open
-    Title Should Be  Create a new Reference
-
 Starting Page Should Be Open
     Page Should Contain  Welcome to BibTex References
 
@@ -41,3 +38,29 @@ Reset Db And Go To Starting Page
     Reset Db
     Go To  ${HOME_URL}
 
+Create a book reference
+    [Arguments]  ${key}=  ${author}=  ${title}=  ${year}=  ${publisher}=
+    Input Text  name=key  ${key}
+    Input Text  name=author  ${author}
+    Input Text  name=title  ${title}
+    Input Text  name=year  ${year}
+    Input Text  name=publisher  ${publisher}
+    Click Button  Create
+
+Create an article reference
+    [Arguments]  ${key}=  ${author}=  ${title}=  ${year}=  ${journal}=
+    Input Text  name=key  ${key}
+    Input Text  name=author  ${author}
+    Input Text  name=title  ${title}
+    Input Text  name=year  ${year}
+    Input Text  name=journal  ${journal}
+    Click Button  Create
+
+Create an inproceedings reference
+    [Arguments]  ${key}=  ${author}=  ${title}=  ${year}=  ${booktitle}=
+    Input Text  name=key  ${key}
+    Input Text  name=author  ${author}
+    Input Text  name=title  ${title}
+    Input Text  name=year  ${year}
+    Input Text  name=booktitle  ${booktitle}
+    Click Button  Create

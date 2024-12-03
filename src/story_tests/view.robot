@@ -8,38 +8,23 @@ Test Setup      Reset Db And Go To Starting Page
 Created book should be seen in view page
     [Tags]  view_book
     Click Link  Create a Book Reference
-    Input Text  name=key  ABC
-    Input Text  name=author  kalle
-    Input Text  name=title  kallen kirja
-    Input Text  name=year  1999
-    Input Text  name=publisher  SKS
-    Click Button  Create
+    Create a book reference  key=kirja123  author=kalle  title=kallen kirja  year=1999  publisher=SKS
     Go To Starting Page
     Click Link  View Book References
-    Page Should Contain  Key: ABC
+    Page Should Contain  Key: kirja123
 
 Created article should be seen in view page
     [Tags]  view_article
     Click Link  Create an Article Reference
-    Input Text  name=key  ABC
-    Input Text  name=author  kalle
-    Input Text  name=title  kallen artikkeli
-    Input Text  name=year  1998
-    Input Text  name=journal  lehti
-    Click Button  Create
+    Create an article reference  key=artikkeli123  author=kalle  title=kallen artikkeli  year=1998  journal=lehti
     Go To Starting Page
     Click Link  View Article References
-    Page Should Contain  Key: ABC
+    Page Should Contain  Key: artikkeli123
 
 Created inproceedings should be seen in view page
     [Tags]  view_inproceedings
     Click Link  Create an Inproceedings Reference
-    Input Text  name=key  ABC
-    Input Text  name=author  kalle
-    Input Text  name=title  kallen inproceedings
-    Input Text  name=year  1997
-    Input Text  name=booktitle  kirja
-    Click Button  Create
+    Create an inproceedings reference  key=inproceedings123  author=kalle  title=kallen inproceedings  year=1997  booktitle=kirja
     Go To Starting Page
     Click Link  View Inproceedings References
-    Page Should Contain  Key: ABC
+    Page Should Contain  Key: inproceedings123
