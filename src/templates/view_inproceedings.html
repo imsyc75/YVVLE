@@ -28,9 +28,6 @@ View Inproceedings References
 
         <a href="/edit_inproceedings/{{ inproceeding[0].key }}" class="button">Edit Reference</a>
         <hr>
-    </div>
-    <a href="{{ url_for('edit_inproceedings', key=inproceeding[0].key) }}" class="button">Edit Reference</a>
-    <hr>
     {% endfor %}
     {% else %}
     No inproceedings references yet.
