@@ -200,8 +200,6 @@ def process_doi():
 
     try:
         data = doi_importer.convert_doi(link)
-        if data is None:
-            raise Exception("Incorrect doi or reference type")
         return render_template("review_doi.html", data=data)
     except Exception as error:
         print(str(error))

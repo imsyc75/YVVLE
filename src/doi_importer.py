@@ -59,6 +59,9 @@ def convert_doi(doi_link : str):
     doi = doi_link.split('doi.org/')[1]
     meta = fetchmeta(doi, fmt = 'bibtex')
 
+    if (meta is None):
+        raise Exception("Invalid doi")
+
     def is_type(type : str):
         return meta.startswith(f" @{type}{'{'}")
 
@@ -70,7 +73,7 @@ def convert_doi(doi_link : str):
     if (is_type('article')):
         return ('article', { 'author': get_value('author'), 'title': get_value('title'), 'year': get_value('year'), 'journal': get_value('journal') })
 
-    return None
+    raise Exception("Invalide doi")
 
 
 if __name__ == "__main__":
