@@ -20,14 +20,17 @@ View Inproceedings References
         <p>Year: {{ inproceeding[0].year }}</p>
         <p>Booktitle: {{ inproceeding[0].booktitle }}</p>
 
-        {{ inproceeding[1] }}
-        {% for line in inproceeding[2] %}
-            {{ line }}
-        {% endfor %}
-        {{ inproceeding[3] }}
-
-        <a href="/edit_inproceedings/{{ inproceeding[0].key }}" class="button">Edit Reference</a>
-        <hr>
+        <div class="doi">
+            <p>{{ inproceeding[1] }}</p>
+            {% for line in inproceeding[2] %}
+            <p>{{ line }}</p>
+            {% endfor %}
+            <p>{{ inproceeding[3] }}</p>
+        </div>
+        <br>
+    </div>
+    <a href="/edit_inproceedings/{{ inproceeding[0].key }}" class="button">Edit Reference</a>
+    <hr>
     {% endfor %}
     {% else %}
     No inproceedings references yet.

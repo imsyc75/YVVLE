@@ -13,23 +13,24 @@ View Book References
 <div>
     {% if books %}
     {% for book in books %}
-    <div>
-        Key: {{ book[0].key }}
-        Author: {{ book[0].author }}
-        Title: {{ book[0].title }}
-        Year: {{ book[0].year }}
-        Publisher: {{ book[0].publisher }}
+    <div class="info">
+        <p>Key: {{ book[0].key }}</p>
+        <p>Author: {{ book[0].author }}</p>
+        <p>Title: {{ book[0].title }}</p>
+        <p>Year: {{ book[0].year }}</p>
+        <p>Publisher: {{ book[0].publisher }}</p>
 
-        {{ book[1] }}
-        {% for line in book[2] %}
-            {{ line }}
-        {% endfor %}
-        {{ book[3] }}
-        
-        <a href="/edit_book/{{ book[0].key }}" class="button">Edit Reference</a>
-        <hr>
+        <div class="doi">
+            <p>{{ book[1] }}</p>
+            {% for line in book[2] %}
+            <p>{{ line }}</p>
+            {% endfor %}
+            <p>{{ book[3] }}</p>
+        </div>
+        <br>
     </div>
-
+    <a href="/edit_book/{{ book[0].key }}" class="button">Edit Reference</a>
+    <hr>
     {% endfor %}
     {% else %}
     No book references yet.

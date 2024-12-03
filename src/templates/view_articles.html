@@ -10,33 +10,34 @@ View Article References
     <a href="/">Back to Home</a>
 </div>
 
-    <div class="list">
-        <hr>
-        {% if articles %}
-        {% for article in articles %}
-        <div class="info">
-            <p>Key: {{ article[0].key }}</p>
+<div class="list">
+    <hr>
+    {% if articles %}
+    {% for article in articles %}
+    <div class="info">
+        <p>Key: {{ article[0].key }}</p>
 
-            <p>Author: {{ article[0].author }}</p>
+        <p>Author: {{ article[0].author }}</p>
 
-            <p>Title: {{ article[0].title }}</p>
+        <p>Title: {{ article[0].title }}</p>
 
-            <p>Year: {{ article[0].year }}</p>
+        <p>Year: {{ article[0].year }}</p>
 
-            <p>Journal: {{ article[0].journal }}</p>
-
-        {{ article[1] }}
-        {% for line in article[2] %}
-            {{ line }}
-        {% endfor %}
-        {{ article[3] }}
-
-        <a href="/edit_article/{{ article[0].key }}" class="button">Edit Reference</a>
-        <hr>
-        {% endfor %}
-        {% else %}
-        No article references yet.
-        {% endif %}
+        <p>Journal: {{ article[0].journal }}</p>
+        <div class="doi">
+            <p>{{ article[1] }}</p>
+            {% for line in article[2] %}
+            <p>{{ line }}</p>
+            {% endfor %}
+            <p>{{ article[3] }}</p>
+        </div>
     </div>
+    <a href="/edit_article/{{ article[0].key }}" class="button">Edit Reference</a>
+    <hr>
+    {% endfor %}
+    {% else %}
+    No article references yet.
+    {% endif %}
+</div>
 
 {% endblock %}
