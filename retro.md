@@ -1,9 +1,9 @@
-Retrospektiivi printin 2 jälkeen: 
+Retrospektiivi sprintin 2 jälkeen: 
 paikalla Virpi, Vilho, Leo, Yuchen, Eero
 
 Glad:
 -kaikki ovat tehneet oman osuutensa sovitusti  
--tyhmätyön tekeminen mukavaa 
+-ryhmätyön tekeminen mukavaa 
 
 Sad:
 -yksikkötestien tekeminen vaikka se ei ole tarkoituksen mukaista 
@@ -14,3 +14,4 @@ Mad:
 
 Sovitut toimenpiteet:
 -toistaiseksi jatketaan samaan malliin
+-sovitetaan aikataulu tarkemmin
