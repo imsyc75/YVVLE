@@ -10,7 +10,7 @@ class TestDoi(unittest.TestCase):
         self.assertRaises(Exception, convert_doi, doi_link)
         
         doi_link = "https://doi.org/10.1145/367473"
-        self.assertRaises(Exception, convert_doi(doi_link))
+        self.assertRaises(Exception, convert_doi, doi_link)
         
     def test_article_doi_is_converted_to_article_reference(self):
         doi_link = "https://doi.org/10.1145/3651278"

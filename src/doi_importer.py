@@ -81,3 +81,5 @@ if __name__ == "__main__":
       print(convert_doi('https://doi.org/10.1145/3651278'))
       print('\n')
       print(convert_doi('https://doi.org/10.1145/3674735'))
+      print('\n')
+      print(convert_doi("https://doi.org/10.1145/367473"))
