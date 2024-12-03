@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block title %}
+Edit Inproceedings Reference
+{% endblock %}
+{% block body %}
+
+<h2>Edit Inproceedings Reference</h2>
+
+<div>
+    <a href="/view_inproceedings">Back to Inproceedings</a>
+</div>
+
+<form action="/update_inproceedings" method="POST">
+    <input type="hidden" name="old_key" value="{{ inproceedings.key }}">
+    
+    <div>
+        <label for="key">Key:</label><br>
+        <input type="text" id="key" name="key" value="{{ inproceedings.key }}" required>
+    </div>
+    
+    <div>
+        <label for="author">Author:</label><br>
+        <input type="text" id="author" name="author" value="{{ inproceedings.author }}" required>
+    </div>
+    
+    <div>
+        <label for="title">Title:</label><br>
+        <input type="text" id="title" name="title" value="{{ inproceedings.title }}" required>
+    </div>
+    
+    <div>
+        <label for="year">Year:</label><br>
+        <input type="text" id="year" name="year" value="{{ inproceedings.year }}" required>
+    </div>
+    
+    <div>
+        <label for="booktitle">Book Title:</label><br>
+        <input type="text" id="booktitle" name="booktitle" value="{{ inproceedings.booktitle }}" required>
+    </div>
+    
+    <div>
+        <input type="submit" value="Update Inproceedings">
+    </div>
+</form>
+
+{% endblock %}

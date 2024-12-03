@@ -233,7 +233,7 @@ def edit_book(key):
     try:
         books = get_books()
         for book in books:
-            if book[0] == key:  # Assuming key is the first element in the book tuple
+            if book.key == key: 
                 return render_template("edit_book.html", book=book)
         flash("Book not found")
         return redirect("/view_books")
@@ -247,7 +247,7 @@ def edit_article(key):
     try:
         articles = get_articles()
         for article in articles:
-            if article[0] == key:
+            if article.key == key:
                 return render_template("edit_article.html", article=article)
         flash("Article not found")
         return redirect("/view_articles")
@@ -261,7 +261,7 @@ def edit_inproceedings(key):
     try:
         inproceedings = get_inproceedings()
         for inproc in inproceedings:
-            if inproc[0] == key:
+            if inproc.key == key:
                 return render_template("edit_inproceedings.html", inproceedings=inproc)
         flash("Inproceedings not found")
         return redirect("/view_inproceedings")
