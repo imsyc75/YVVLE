@@ -21,12 +21,12 @@ View Inproceedings References
         <p>Year: {{ inproceeding[0].year }}</p>
         <p>Booktitle: {{ inproceeding[0].booktitle }}</p>
 
-        <div class="doi">
-            <p>{{ inproceeding[1] }}</p>
+        <div class="bib">
+            {{ inproceeding[1] }}
             {% for line in inproceeding[2] %}
-            <p>{{ line }}</p>
+            {{ line }}
             {% endfor %}
-            <p>{{ inproceeding[3] }}</p>
+            {{ inproceeding[3] }}
         </div>
         <br>
     </div>

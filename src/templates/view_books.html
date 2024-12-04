@@ -21,12 +21,12 @@ View Book References
         <p>Year: {{ book[0].year }}</p>
         <p>Publisher: {{ book[0].publisher }}</p>
 
-        <div class="doi">
-            <p>{{ book[1] }}</p>
+        <div class="bib">
+            {{ book[1] }}
             {% for line in book[2] %}
-            <p>{{ line }}</p>
+            {{ line }}
             {% endfor %}
-            <p>{{ book[3] }}</p>
+            {{ book[3] }}
         </div>
         <br>
     </div>
