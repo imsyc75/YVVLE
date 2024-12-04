@@ -1,3 +1,12 @@
 [run]
 source = src
-omit = src/**/__init__.py,src/tests/**,src/app.py,src/AppLibrary.py,src/config.py,src/db_helper.py,src/index.py,src/repositories/**
+omit = src/**/__init__.py,src/tests/**,src/app.py,src/AppLibrary.py,src/config.py,src/db_helper.py,src/index.py,src/repositories/**,src/entities/**
+
+[report]
+exclude_also =
+    def parse_to_file
+    def parse_books_to_list
+    def parse_articles_to_list
+    def parse_inproceedings_to_list
+    def fetchmeta
+    if __name__
