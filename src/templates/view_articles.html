@@ -25,11 +25,11 @@ View Article References
 
         <p>Journal: {{ article[0].journal }}</p>
         <div class="doi">
-            <p>{{ article[1] }}</p>
+            {{ article[1] }}
             {% for line in article[2] %}
-            <p>{{ line }}</p>
+            {{ line }}
             {% endfor %}
-            <p>{{ article[3] }}</p>
+            {{ article[3] }}
         </div>
     </div>
     <a href="/edit_article/{{ article[0].key }}" class="button">Edit Reference</a>
