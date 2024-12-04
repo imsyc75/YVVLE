@@ -1,7 +1,10 @@
 # YVVLE
 1. Backlog: [(https://docs.google.com/spreadsheets/d/1QXsTZB_xjxKfIW40T6v8yH378ybaFEUcBSehMxtYBSs/edit?usp=sharing)](https://docs.google.com/spreadsheets/d/1QXsTZB_xjxKfIW40T6v8yH378ybaFEUcBSehMxtYBSs/edit?usp=sharing)
 2. [![CI Workflow Badge](https://github.com/imsyc75/YVVLE/workflows/CI/badge.svg)](https://github.com/imsyc75/YVVLE/actions)
-3. Test coverage: [https://github.com/imsyc75/YVVLE/blob/main/testcoverage.html](https://github.com/imsyc75/YVVLE/blob/main/testcoverage.html)
+3. Test coverage:
+   
+   ![image](https://github.com/user-attachments/assets/64a43875-aab0-4d7a-984d-e7443067c0bf)
+
 
 # Definition of done
 1. User stories are accepted
