@@ -15,7 +15,7 @@ def validate_length(params, min, max):
         if len(param) > max:
             raise ValueError("Field too long")
         if len(param) < min:
-            raise ValueError("Field too shot")    
+            raise ValueError("Field too short")    
 
 def validate_key(key):
     keys = get_all_keys()
