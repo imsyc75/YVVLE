@@ -93,6 +93,11 @@ label {
   width: 40em;
 }
 
+hr.rounded {
+  border: 8px solid rgb(180, 175, 185);
+  border-radius: 5px;
+}
+
 .info {
   display: table;
   width: 40em;

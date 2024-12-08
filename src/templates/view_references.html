@@ -1,0 +1,103 @@
+{% extends "layout.html" %}
+{% block title %}
+View All References
+{% endblock %}
+{% block body %}
+
+<h2>All References</h2>
+
+<div>
+    <a href="/">Back to Home</a>
+</div>
+<hr class="rounded">
+<div class="list">
+    <h3>Articles:</h3>
+    {% if articles %}
+    {% for article in articles %}
+    <div class="info">
+        <p>Key: {{ article[0].key }}</p>
+
+        <p>Author: {{ article[0].author }}</p>
+
+        <p>Title: {{ article[0].title }}</p>
+
+        <p>Year: {{ article[0].year }}</p>
+
+        <p>Journal: {{ article[0].journal }}</p>
+        <div class="bib">
+            {{ article[1] }}
+            {% for line in article[2] %}
+            {{ line }}
+            {% endfor %}
+            {{ article[3] }}
+        </div>
+    </div>
+    <a href="/edit_article/{{ article[0].key }}" class="button">Edit Reference</a>
+    <hr>
+    {% endfor %}
+    {% else %}
+    No article references yet.
+    {% endif %}
+</div>
+<hr class="rounded">
+<div class="list">
+    <h3>Books:</h3>
+    {% if books %}
+    {% for book in books %}
+    <div class="info">
+        <p>Key: {{ book[0].key }}</p>
+
+        <p>Author: {{ book[0].author }}</p>
+
+        <p>Title: {{ book[0].title }}</p>
+
+        <p>Year: {{ book[0].year }}</p>
+
+        <p>Publisher: {{ book[0].publisher }}</p>
+        <div class="bib">
+            {{ book[1] }}
+            {% for line in book[2] %}
+            {{ line }}
+            {% endfor %}
+            {{ book[3] }}
+        </div>
+    </div>
+    <a href="/edit_book/{{ book[0].key }}" class="button">Edit Reference</a>
+    <hr>
+    {% endfor %}
+    {% else %}
+    No book references yet.
+    {% endif %}
+</div>
+<hr class="rounded">
+<div class="list">
+    <h3>Inproceedings:</h3>
+    {% if inproceedings %}
+    {% for inproceeding in inproceedings %}
+    <div class="info">
+        <p>Key: {{ inproceeding[0].key }}</p>
+
+        <p>Author: {{ inproceeding[0].author }}</p>
+
+        <p>Title: {{ inproceeding[0].title }}</p>
+
+        <p>Year: {{ inproceeding[0].year }}</p>
+
+        <p>Booktitle: {{ inproceeding[0].booktitle }}</p>
+        <div class="bib">
+            {{ inproceeding[1] }}
+            {% for line in inproceeding[2] %}
+            {{ line }}
+            {% endfor %}
+            {{ inproceeding[3] }}
+        </div>
+    </div>
+    <a href="/edit_inproceedings/{{ inproceeding[0].key }}" class="button">Edit Reference</a>
+    <hr>
+    {% endfor %}
+    {% else %}
+    No inproceeding references yet.
+    {% endif %}
+</div>
+
+{% endblock %}

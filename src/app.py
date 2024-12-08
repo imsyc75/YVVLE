@@ -74,6 +74,43 @@ def view_inproceedings():
         return redirect("/")
 
 
+@app.route("/view_references")
+def view_references():
+    try:
+        books = get_books()
+        parsed_books = bibtex_parser.parse_books_to_list()
+
+        books_tuple = []
+        for i in range(len(books)):
+            lines = parsed_books[i].split('\n')
+            books_tuple.append(
+                (books[i], lines[0], lines[1:(len(lines) - 1)], lines[-1]))
+
+        articles = get_articles()
+        parsed_articles = bibtex_parser.parse_articles_to_list()
+
+        articles_tuple = []
+        for i in range(len(articles)):
+            lines = parsed_articles[i].split('\n')
+            articles_tuple.append(
+                (articles[i], lines[0], lines[1:(len(lines) - 1)], lines[-1]))
+
+        inproceedings = get_inproceedings()
+        parsed_inprocs = bibtex_parser.parse_inproceedings_to_list()
+
+        inprocs_tuple = []
+        for i in range(len(inproceedings)):
+            lines = parsed_inprocs[i].split('\n')
+            inprocs_tuple.append(
+                (inproceedings[i], lines[0], lines[1:(len(lines) - 1)], lines[-1]))
+
+        return render_template("view_references.html", books=books_tuple, articles=articles_tuple, inproceedings=inprocs_tuple)
+    except Exception as error:
+        print(str(error))
+        flash(str(error))
+        return redirect("/")
+
+
 @app.route("/new_book")
 def new():
     return render_template("new_book.html")
@@ -97,7 +134,7 @@ def book_creation():
     year = request.form.get("year")
     publisher = request.form.get("publisher")
 
-    try: 
+    try:
         create_book(key, author, title, year, publisher)
         return redirect("/")
 
@@ -115,7 +152,7 @@ def article_creation():
     year = request.form.get("year")
     journal = request.form.get("journal")
 
-    try: 
+    try:
         create_article(key, author, title, year, journal)
         return redirect("/")
 
@@ -133,7 +170,7 @@ def inproceedings_creation():
     year = request.form.get("year")
     booktitle = request.form.get("booktitle")
 
-    try: 
+    try:
         create_inproceedings(key, author, title, year, booktitle)
         return redirect("/")
     except Exception as error:
@@ -219,19 +256,20 @@ def add_doi():
             year = request.form.get("year")
             journal = request.form.get("journal")
             create_article(key, author, title, year, journal)
-        
+
         return redirect("/")
     except Exception as error:
         print(str(error))
         flash(str(error))
         return redirect("/doi")
-    
+
+
 @app.route("/edit_book/<key>")
 def edit_book(key):
     try:
         books = get_books()
         for book in books:
-            if book.key == key: 
+            if book.key == key:
                 return render_template("edit_book.html", book=book)
         flash("Book not found")
         return redirect("/view_books")
@@ -239,6 +277,7 @@ def edit_book(key):
         print(str(error))
         flash(str(error))
         return redirect("/view_books")
+
 
 @app.route("/edit_article/<key>")
 def edit_article(key):
@@ -254,6 +293,7 @@ def edit_article(key):
         flash(str(error))
         return redirect("/view_articles")
 
+
 @app.route("/edit_inproceedings/<key>")
 def edit_inproceedings(key):
     try:
@@ -267,6 +307,7 @@ def edit_inproceedings(key):
         print(str(error))
         flash(str(error))
         return redirect("/view_inproceedings")
+
 
 @app.route("/update_book", methods=["POST"])
 def update_book():
@@ -288,6 +329,7 @@ def update_book():
         flash(str(error))
         return redirect(f"/edit_book/{old_key}")
 
+
 @app.route("/update_article", methods=["POST"])
 def update_article():
     old_key = request.form.get("old_key")
@@ -305,6 +347,7 @@ def update_article():
         print(str(error))
         flash(str(error))
         return redirect(f"/edit_article/{old_key}")
+
 
 @app.route("/update_inproceedings", methods=["POST"])
 def update_inproceedings():
