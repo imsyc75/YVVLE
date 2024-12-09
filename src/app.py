@@ -74,41 +74,47 @@ def view_inproceedings():
         return redirect("/")
 
 
-@app.route("/view_references")
+@app.route("/view_references", methods=["GET", "POST"])
 def view_references():
-    try:
-        books = get_books()
-        parsed_books = bibtex_parser.parse_books_to_list()
+    if request.method == "GET":
+        return render_template("view_references.html")
+    if request.method == "POST":
+        try:
+            books_tuple = []
+            if request.form.get("books"):
+                books = get_books()
+                parsed_books = bibtex_parser.parse_books_to_list()
+           
+                for i in range(len(books)):
+                    lines = parsed_books[i].split('\n')
+                    books_tuple.append(
+                        (books[i], lines[0], lines[1:(len(lines) - 1)], lines[-1]))
 
-        books_tuple = []
-        for i in range(len(books)):
-            lines = parsed_books[i].split('\n')
-            books_tuple.append(
-                (books[i], lines[0], lines[1:(len(lines) - 1)], lines[-1]))
+            articles_tuple = []
+            if request.form.get("articles"):
+                articles = get_articles()
+                parsed_articles = bibtex_parser.parse_articles_to_list()           
 
-        articles = get_articles()
-        parsed_articles = bibtex_parser.parse_articles_to_list()
+                for i in range(len(articles)):
+                    lines = parsed_articles[i].split('\n')
+                    articles_tuple.append(
+                        (articles[i], lines[0], lines[1:(len(lines) - 1)], lines[-1]))
 
-        articles_tuple = []
-        for i in range(len(articles)):
-            lines = parsed_articles[i].split('\n')
-            articles_tuple.append(
-                (articles[i], lines[0], lines[1:(len(lines) - 1)], lines[-1]))
+            inprocs_tuple = []
+            if request.form.get("inproceedings"):
+                inproceedings = get_inproceedings()
+                parsed_inprocs = bibtex_parser.parse_inproceedings_to_list()
+                
+                for i in range(len(inproceedings)):
+                    lines = parsed_inprocs[i].split('\n')
+                    inprocs_tuple.append(
+                        (inproceedings[i], lines[0], lines[1:(len(lines) - 1)], lines[-1]))
 
-        inproceedings = get_inproceedings()
-        parsed_inprocs = bibtex_parser.parse_inproceedings_to_list()
-
-        inprocs_tuple = []
-        for i in range(len(inproceedings)):
-            lines = parsed_inprocs[i].split('\n')
-            inprocs_tuple.append(
-                (inproceedings[i], lines[0], lines[1:(len(lines) - 1)], lines[-1]))
-
-        return render_template("view_references.html", books=books_tuple, articles=articles_tuple, inproceedings=inprocs_tuple)
-    except Exception as error:
-        print(str(error))
-        flash(str(error))
-        return redirect("/")
+            return render_template("view_references.html", books=books_tuple, articles=articles_tuple, inproceedings=inprocs_tuple)
+        except Exception as error:
+            print(str(error))
+            flash(str(error))
+            return redirect("/view_references")
 
 
 @app.route("/new_book")

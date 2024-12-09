@@ -9,10 +9,21 @@ View All References
 <div>
     <a href="/">Back to Home</a>
 </div>
+<br>
+<form id="changeType" action="/view_references" method="POST">
+    <h3>Choose reference types:</h3>
+    <input type="checkbox" name="articles">Articles
+    <input type="checkbox" name="books">Books
+    <input type="checkbox" name="inproceedings">Inproceedings
+    <br>
+    <input type="submit" value="Get references">
+</form>
+
+{% if articles %}
 <hr class="rounded">
-<div class="list">
+<div class="list" id="articles">
     <h3>Articles:</h3>
-    {% if articles %}
+
     {% for article in articles %}
     <div class="info">
         <p>Key: {{ article[0].key }}</p>
@@ -25,24 +36,26 @@ View All References
 
         <p>Journal: {{ article[0].journal }}</p>
         <div class="bib">
+            <div id="{{ article[0].key }}">
             {{ article[1] }}
             {% for line in article[2] %}
             {{ line }}
             {% endfor %}
             {{ article[3] }}
+            </div>
+            <button onclick="navigator.clipboard.writeText(document.getElementById('{{ article[0].key }}').innerHTML.trim())">Copy to clipboard</button> 
         </div>
     </div>
     <a href="/edit_article/{{ article[0].key }}" class="button">Edit Reference</a>
     <hr>
     {% endfor %}
-    {% else %}
-    No article references yet.
-    {% endif %}
 </div>
+{% endif %}
+
+{% if books %}
 <hr class="rounded">
-<div class="list">
+<div class="list" id="books">
     <h3>Books:</h3>
-    {% if books %}
     {% for book in books %}
     <div class="info">
         <p>Key: {{ book[0].key }}</p>
@@ -55,24 +68,26 @@ View All References
 
         <p>Publisher: {{ book[0].publisher }}</p>
         <div class="bib">
+            <div id="{{ book[0].key }}">
             {{ book[1] }}
             {% for line in book[2] %}
             {{ line }}
             {% endfor %}
             {{ book[3] }}
+            </div>
+            <button onclick="navigator.clipboard.writeText(document.getElementById('{{ book[0].key }}').innerHTML.trim())">Copy to clipboard</button> 
         </div>
     </div>
     <a href="/edit_book/{{ book[0].key }}" class="button">Edit Reference</a>
     <hr>
     {% endfor %}
-    {% else %}
-    No book references yet.
-    {% endif %}
 </div>
+{% endif %}
+
+{% if inproceedings %}
 <hr class="rounded">
-<div class="list">
+<div class="list" id="inproceedings">
     <h3>Inproceedings:</h3>
-    {% if inproceedings %}
     {% for inproceeding in inproceedings %}
     <div class="info">
         <p>Key: {{ inproceeding[0].key }}</p>
@@ -84,20 +99,21 @@ View All References
         <p>Year: {{ inproceeding[0].year }}</p>
 
         <p>Booktitle: {{ inproceeding[0].booktitle }}</p>
-        <div class="bib">
+        <div class="bib" >
+            <div id="{{ inproceeding[0].key }}">
             {{ inproceeding[1] }}
             {% for line in inproceeding[2] %}
             {{ line }}
             {% endfor %}
             {{ inproceeding[3] }}
-        </div>
+            </div>
+            <button onclick="navigator.clipboard.writeText(document.getElementById('{{ inproceeding[0].key }}').innerHTML.trim())">Copy to clipboard</button> 
+        </div>    
     </div>
     <a href="/edit_inproceedings/{{ inproceeding[0].key }}" class="button">Edit Reference</a>
     <hr>
     {% endfor %}
-    {% else %}
-    No inproceeding references yet.
-    {% endif %}
 </div>
 
+{% endif %}
 {% endblock %}
