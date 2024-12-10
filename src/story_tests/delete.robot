@@ -18,6 +18,7 @@ Deleted book is not in the database
     Click Link  Delete References
     Select Checkbox  kirja123
     Click Button  Delete
+    Alert Should Be Present  text=Are you sure you want to delete the item?
     Page Should Not Contain  kirja123
     ${books}=  Get Books
     Should Be Equal  ${books}  ${EMPTY}
@@ -30,6 +31,7 @@ Deleted article is not in the database
     Click Link  Delete References
     Select Checkbox  artikkeli123
     Click Button  Delete
+    Alert Should Be Present  text=Are you sure you want to delete the item?
     Page Should Not Contain  artikkeli123
     ${articles}=  Get Articles
     Should Be Equal  ${articles}  ${EMPTY}
@@ -42,6 +44,7 @@ Deleted inproceedings is not in the database
     Click Link  Delete References
     Select Checkbox  inproceedings123
     Click Button  Delete
+    Alert Should Be Present  text=Are you sure you want to delete the item?
     Page Should Not Contain  inproceedings123
     ${inproceedings}=  Get Inproceedings
     Should Be Equal  ${inproceedings}  ${EMPTY}
