@@ -262,6 +262,18 @@ def add_doi():
             year = request.form.get("year")
             journal = request.form.get("journal")
             create_article(key, author, title, year, journal)
+        if (type == 'book'):
+            author = request.form.get("author")
+            title = request.form.get("title")
+            year = request.form.get("year")
+            publisher = request.form.get("publisher")
+            create_book(key, author, title, year, publisher)
+        if (type == 'inproceedings'):
+            author = request.form.get("author")
+            title = request.form.get("title")
+            year = request.form.get("year")
+            booktitle = request.form.get("booktitle")
+            create_inproceedings(key, author, title, year, booktitle)
 
         return redirect("/")
     except Exception as error:

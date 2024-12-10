@@ -54,32 +54,45 @@ def fetchmeta(doi, fmt='dict', **kwargs):
 
 def convert_doi(doi_link : str):
     if (len(doi_link) == 0 or doi_link.find('doi.org/') == -1):
-        raise Exception("Invalid doi")
+        raise Exception("The doi link was given incorrectly")
 
     doi = doi_link.split('doi.org/')[1]
     meta = fetchmeta(doi, fmt = 'bibtex')
 
+    # return meta
+
     if (meta is None):
-        raise Exception("Invalid doi")
+        raise Exception("Such a doi does not exist")
 
     def is_type(type : str):
         return meta.startswith(f" @{type}{'{'}")
 
     def get_value(type : str):
         type += '={'
-        s = meta.find(type) + len(type)
+        s = meta.find(type)
+        if (s == -1):
+            raise Exception("Reference not supported")
+
+        s += len(type)
         return meta[s : meta.find('}', s, None)]
 
     if (is_type('article')):
         return ('article', { 'author': get_value('author'), 'title': get_value('title'), 'year': get_value('year'), 'journal': get_value('journal') })
 
-    raise Exception("Invalide doi")
+    if (is_type('book')):
+        return ('book', { 'author': get_value('author'), 'title': get_value('title'), 'year': get_value('year'), 'publisher': get_value('publisher') })
+    
+    if (is_type('inproceedings')):
+        return ('inproceedings', { 'author': get_value('author'), 'title': get_value('title'), 'year': get_value('year'), 'booktitle': get_value('booktitle') })
+    
+    raise Exception("Reference not supported")
+        
 
 
 if __name__ == "__main__":
     with app.app_context():
-      print(convert_doi('https://doi.org/10.1145/3651278'))
-      print('\n')
-      print(convert_doi('https://doi.org/10.1145/3674735'))
-      print('\n')
-      print(convert_doi("https://doi.org/10.1145/367473"))
+        print(convert_doi('https://doi.org/10.1145/3603178'))
+        print(convert_doi('https://doi.org/10.1145/3502181.3535462'))
+        print(convert_doi('https://doi.org/10.1145/3651278'))
+    #   print(convert_doi('https://doi.org/10.1145/3674735'))
+    #   print(convert_doi("https://doi.org/10.1145/367473"))
