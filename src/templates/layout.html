@@ -1,15 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/navbar.css') }}">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <title>{% block title %}{% endblock %}</title>
 </head>
-
 <body>
   <div id="bodyblock">
+    <!-- Task Bar -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <!-- View with submenu -->
+        <div class="nav-item">
+          View
+          <div class="submenu">
+            <a href="{{ url_for('view_books') }}">Books</a>
+            <a href="{{ url_for('view_articles') }}">Articles</a>
+            <a href="{{ url_for('view_inproceedings') }}">Inproceedings</a>
+            <a href="{{ url_for('view_references') }}">All References</a>
+          </div>
+        </div>
+
+        <!-- Create with submenu -->
+        <div class="nav-item">
+          Create
+          <div class="submenu">
+            <a href="{{ url_for('new') }}">New Book</a>
+            <a href="{{ url_for('new_article') }}">New Article</a>
+            <a href="{{ url_for('new_inproceedings') }}">New Inproceedings</a>
+          </div>
+        </div>
+
+        <!-- Regular items -->
+        <a href="{{ url_for('delete_reference') }}" class="nav-item">Delete</a>
+        <a href="{{ url_for('download') }}" class="nav-item">Download</a>
+        <a href="{{ url_for('doi') }}" class="nav-item">Add with DOI</a>
+      </div>
+    </nav>
+
     <div id="flash">
       {% with messages = get_flashed_messages() %}
       {% if messages %}
@@ -19,14 +49,10 @@
           <p>{{ message }}</p>
         </div>
         {% endfor %}
-
       {% endif %}
       {% endwith %}
     </div>
     {% block body %}{% endblock %}
   </div>
-      
-
 </body>
-
 </html>
