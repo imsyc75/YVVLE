@@ -17,7 +17,7 @@ Delete References
     {% if books %}
         {% for book in books %}
             <ul>
-                <input type="checkbox" name="books" value="{{ book.key }}" onclick="clicked(event)" > Key: {{ book.key }} ({{ book.author }}, {{ book.title }}, {{ book.year }}, {{ book.publisher }})
+                <input type="checkbox" name="books" value="{{ book.key }}" > Key: {{ book.key }} ({{ book.author }}, {{ book.title }}, {{ book.year }}, {{ book.publisher }})
             </ul>
         {% endfor %}
     {% else %}
@@ -29,7 +29,7 @@ Delete References
     {% if articles %}
         {% for article in articles %}
             <ul>
-                <input type="checkbox" name="articles" value="{{ article.key }}" onclick="clicked(event)"> Key: {{ article.key }} ({{ article.author }}, {{article.title }}, {{ article.year }}, {{ article.journal }})
+                <input type="checkbox" name="articles" value="{{ article.key }}" > Key: {{ article.key }} ({{ article.author }}, {{article.title }}, {{ article.year }}, {{ article.journal }})
             </ul>
         {% endfor %}
     {% else %}
@@ -41,7 +41,7 @@ Delete References
     {% if inproceedings %}
         {% for inproceeding in inproceedings %}
             <ul>
-                <input type="checkbox" name="inproceedings" value="{{ inproceeding.key }}" onclick="clicked(event)"> Key: {{ inproceeding.key }} ({{ inproceeding.author }}, {{ inproceeding.title }}, {{ inproceeding.year }}, {{ inproceeding.booktitle }})
+                <input type="checkbox" name="inproceedings" value="{{ inproceeding.key }}" > Key: {{ inproceeding.key }} ({{ inproceeding.author }}, {{ inproceeding.title }}, {{ inproceeding.year }}, {{ inproceeding.booktitle }})
             </ul>
         {% endfor %}
     {% else %}
@@ -51,15 +51,14 @@ Delete References
     {% endif %}
 
 <br>
-<button type="submit">
+<button type="submit" onclick="return clicked()">
   Delete
 </button>
 
 <script type="text/javascript">
     function clicked() {
-        var txt
        if (confirm('Are you sure you want to delete the item?')) {
-           currentForm.submit();
+           submit();
        } else {
            return false;
        }
