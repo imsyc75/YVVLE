@@ -1,7 +1,8 @@
 # YVVLE
 1. Backlog: [(https://docs.google.com/spreadsheets/d/1QXsTZB_xjxKfIW40T6v8yH378ybaFEUcBSehMxtYBSs/edit?usp=sharing)](https://docs.google.com/spreadsheets/d/1QXsTZB_xjxKfIW40T6v8yH378ybaFEUcBSehMxtYBSs/edit?usp=sharing)
-2. [![CI Workflow Badge](https://github.com/imsyc75/YVVLE/workflows/CI/badge.svg)](https://github.com/imsyc75/YVVLE/actions)
-3. Test coverage:
+2. Loppuraportti: [(https://docs.google.com/document/d/1G-oZxLg_GHcILIwPsSvsoSyxSch7FL-xmNRnlb0m9QM/edit?usp=sharing)](https://docs.google.com/document/d/1G-oZxLg_GHcILIwPsSvsoSyxSch7FL-xmNRnlb0m9QM/edit?usp=sharing)
+3. [![CI Workflow Badge](https://github.com/imsyc75/YVVLE/workflows/CI/badge.svg)](https://github.com/imsyc75/YVVLE/actions)
+4. Test coverage:
    
    ![image](https://github.com/user-attachments/assets/64a43875-aab0-4d7a-984d-e7443067c0bf)
 
