@@ -9,6 +9,7 @@
     position: sticky;
     top: 0;
     z-index: 1000;
+    border-radius: 25px;
 }
 
 .nav-container {
@@ -54,7 +55,7 @@
     top: calc(100% + 2px);
     left: 0;
     min-width: 200px;
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(180, 175, 185, 0.6);
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02),
                 0 10px 25px rgba(0, 0, 0, 0.05);
