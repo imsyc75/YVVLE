@@ -14,16 +14,18 @@ View Article References
     <hr>
     {% if articles %}
     {% for article in articles %}
-    <div class="info">
-        <p>Key: {{ article[0].key }}</p>
+    <div class="item">
+        <div class="info">
+            <p>Key: {{ article[0].key }}</p>
 
-        <p>Author: {{ article[0].author }}</p>
+            <p>Author: {{ article[0].author }}</p>
 
-        <p>Title: {{ article[0].title }}</p>
+            <p>Title: {{ article[0].title }}</p>
 
-        <p>Year: {{ article[0].year }}</p>
+            <p>Year: {{ article[0].year }}</p>
 
-        <p>Journal: {{ article[0].journal }}</p>
+            <p>Journal: {{ article[0].journal }}</p>
+        </div>    
         <div class="bib">
             {{ article[1] }}
             {% for line in article[2] %}
@@ -32,6 +34,7 @@ View Article References
             {{ article[3] }}
         </div>
     </div>
+    <br>
     <a href="/edit_article/{{ article[0].key }}" class="button">Edit Reference</a>
     <hr>
     {% endfor %}

@@ -4,6 +4,13 @@ View All References
 {% endblock %}
 {% block body %}
 
+<script>
+    function toggleDiv(id) {
+        var div = document.getElementById(id);
+        div.style.display = "block";
+    }
+</script>
+
 <h2>All References</h2>
 
 <div>
@@ -25,27 +32,35 @@ View All References
     <h3>Articles:</h3>
 
     {% for article in articles %}
-    <div class="info">
-        <p>Key: {{ article[0].key }}</p>
+    <div class="item">
+        <div class="info">
+            <p>Key: {{ article[0].key }}</p>
 
-        <p>Author: {{ article[0].author }}</p>
+            <p>Author: {{ article[0].author }}</p>
 
-        <p>Title: {{ article[0].title }}</p>
+            <p>Title: {{ article[0].title }}</p>
 
-        <p>Year: {{ article[0].year }}</p>
+            <p>Year: {{ article[0].year }}</p>
 
-        <p>Journal: {{ article[0].journal }}</p>
+            <p>Journal: {{ article[0].journal }}</p>
+        </div>
         <div class="bib">
+            <p>Bibtex:</p>
             <div id="{{ article[0].key }}">
-            {{ article[1] }}
-            {% for line in article[2] %}
-            {{ line }}
-            {% endfor %}
-            {{ article[3] }}
+                {{ article[1] }}
+                {% for line in article[2] %}
+                {{ line }}
+                {% endfor %}
+                {{ article[3] }}
             </div>
-            <button onclick="navigator.clipboard.writeText(document.getElementById('{{ article[0].key }}').innerHTML.trim())">Copy to clipboard</button> 
+            <button
+                onclick="navigator.clipboard.writeText(document.getElementById('{{ article[0].key }}').innerHTML.trim()); toggleDiv('{{ article[0].key }}_copy')">Copy
+                to clipboard
+            </button>
+            <div class="copy" id="{{ article[0].key }}_copy" style="display: none">Copied to clipboard!</div>
         </div>
     </div>
+    <br>
     <a href="/edit_article/{{ article[0].key }}" class="button">Edit Reference</a>
     <hr>
     {% endfor %}
@@ -57,27 +72,35 @@ View All References
 <div class="list" id="books">
     <h3>Books:</h3>
     {% for book in books %}
-    <div class="info">
-        <p>Key: {{ book[0].key }}</p>
+    <div class="item">
+        <div class="info">
+            <p>Key: {{ book[0].key }}</p>
 
-        <p>Author: {{ book[0].author }}</p>
+            <p>Author: {{ book[0].author }}</p>
 
-        <p>Title: {{ book[0].title }}</p>
+            <p>Title: {{ book[0].title }}</p>
 
-        <p>Year: {{ book[0].year }}</p>
+            <p>Year: {{ book[0].year }}</p>
 
-        <p>Publisher: {{ book[0].publisher }}</p>
+            <p>Publisher: {{ book[0].publisher }}</p>
+        </div>
         <div class="bib">
+            <p>Bibtex:</p>
             <div id="{{ book[0].key }}">
-            {{ book[1] }}
-            {% for line in book[2] %}
-            {{ line }}
-            {% endfor %}
-            {{ book[3] }}
-            </div>
-            <button onclick="navigator.clipboard.writeText(document.getElementById('{{ book[0].key }}').innerHTML.trim())">Copy to clipboard</button> 
+                {{ book[1] }}
+                {% for line in book[2] %}
+                {{ line }}
+                {% endfor %}
+                {{ book[3] }}
+            </div>           
+            <button
+                onclick="navigator.clipboard.writeText(document.getElementById('{{ book[0].key }}').innerHTML.trim()); toggleDiv('{{ book[0].key }}_copy');">Copy
+                to clipboard
+            </button>
+            <div class="copy" id="{{ book[0].key }}_copy" style="display: none">Copied to clipboard!</div>
         </div>
     </div>
+    <br>
     <a href="/edit_book/{{ book[0].key }}" class="button">Edit Reference</a>
     <hr>
     {% endfor %}
@@ -89,31 +112,40 @@ View All References
 <div class="list" id="inproceedings">
     <h3>Inproceedings:</h3>
     {% for inproceeding in inproceedings %}
-    <div class="info">
-        <p>Key: {{ inproceeding[0].key }}</p>
+    <div class="item">
+        <div class="info">
+            <p>Key: {{ inproceeding[0].key }}</p>
 
-        <p>Author: {{ inproceeding[0].author }}</p>
+            <p>Author: {{ inproceeding[0].author }}</p>
 
-        <p>Title: {{ inproceeding[0].title }}</p>
+            <p>Title: {{ inproceeding[0].title }}</p>
 
-        <p>Year: {{ inproceeding[0].year }}</p>
-
-        <p>Booktitle: {{ inproceeding[0].booktitle }}</p>
-        <div class="bib" >
+            <p>Year: {{ inproceeding[0].year }}</p>
+            <p>Booktitle: {{ inproceeding[0].booktitle }}</p>
+        </div>
+        <div class="bib">
+            <p>Bibtex:</p>
             <div id="{{ inproceeding[0].key }}">
-            {{ inproceeding[1] }}
-            {% for line in inproceeding[2] %}
-            {{ line }}
-            {% endfor %}
-            {{ inproceeding[3] }}
+                {{ inproceeding[1] }}
+                {% for line in inproceeding[2] %}
+                {{ line }}
+                {% endfor %}
+                {{ inproceeding[3] }}
             </div>
-            <button onclick="navigator.clipboard.writeText(document.getElementById('{{ inproceeding[0].key }}').innerHTML.trim())">Copy to clipboard</button> 
-        </div>    
+            <button
+                onclick="navigator.clipboard.writeText(document.getElementById('{{ inproceeding[0].key }}').innerHTML.trim()); toggleDiv('{{ inproceeding[0].key }}_copy')">Copy
+                to clipboard
+            </button>
+            <div class="copy" id="{{ inproceeding[0].key }}_copy" style="display: none">Copied to clipboard!</div>
+        </div>
     </div>
+    <br>
     <a href="/edit_inproceedings/{{ inproceeding[0].key }}" class="button">Edit Reference</a>
     <hr>
     {% endfor %}
 </div>
+
+
 
 {% endif %}
 {% endblock %}

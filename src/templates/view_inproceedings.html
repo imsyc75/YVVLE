@@ -14,13 +14,14 @@ View Inproceedings References
     <hr>
     {% if inproceedings %}
     {% for inproceeding in inproceedings %}
-    <div class="info">
-        <p>Key: {{ inproceeding[0].key }}</p>
-        <p>Author: {{ inproceeding[0].author }}</p>
-        <p>Title: {{ inproceeding[0].title }}</p>
-        <p>Year: {{ inproceeding[0].year }}</p>
-        <p>Booktitle: {{ inproceeding[0].booktitle }}</p>
-
+    <div class="item">
+        <div class="info">
+            <p>Key: {{ inproceeding[0].key }}</p>
+            <p>Author: {{ inproceeding[0].author }}</p>
+            <p>Title: {{ inproceeding[0].title }}</p>
+            <p>Year: {{ inproceeding[0].year }}</p>
+            <p>Booktitle: {{ inproceeding[0].booktitle }}</p>
+        </div>
         <div class="bib">
             {{ inproceeding[1] }}
             {% for line in inproceeding[2] %}
@@ -30,6 +31,7 @@ View Inproceedings References
         </div>
         <br>
     </div>
+    <br>
     <a href="/edit_inproceedings/{{ inproceeding[0].key }}" class="button">Edit Reference</a>
     <hr>
     {% endfor %}

@@ -14,13 +14,14 @@ View Book References
     <hr>
     {% if books %}
     {% for book in books %}
-    <div class="info">
-        <p>Key: {{ book[0].key }}</p>
-        <p>Author: {{ book[0].author }}</p>
-        <p>Title: {{ book[0].title }}</p>
-        <p>Year: {{ book[0].year }}</p>
-        <p>Publisher: {{ book[0].publisher }}</p>
-
+    <div class="item">
+        <div class="info">
+            <p>Key: {{ book[0].key }}</p>
+            <p>Author: {{ book[0].author }}</p>
+            <p>Title: {{ book[0].title }}</p>
+            <p>Year: {{ book[0].year }}</p>
+            <p>Publisher: {{ book[0].publisher }}</p>
+        </div>    
         <div class="bib">
             {{ book[1] }}
             {% for line in book[2] %}
@@ -30,6 +31,7 @@ View Book References
         </div>
         <br>
     </div>
+    <br>
     <a href="/edit_book/{{ book[0].key }}" class="button">Edit Reference</a>
     <hr>
     {% endfor %}
