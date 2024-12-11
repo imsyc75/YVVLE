@@ -42,3 +42,25 @@ Editing book shows correctly when viewing
     Input Text  name=author  sami
     Click Button  Update Book
     Page Should Contain  Author: sami
+
+Editing article shows correctly when viewing
+    [Tags]  edit_article_view
+    Click Link  Create an Article Reference
+    Create an article reference  key=artikkeli123  author=kalle  title=kallen artikkeli  year=1999  journal=lehti
+    Go To Starting Page
+    Click Link  View Article References
+    Click Link  Edit Reference
+    Input Text  name=author  sami
+    Click Button  Update Article
+    Page Should Contain  Author: sami
+
+Editing inproceedings shows correctly when viewing
+    [Tags]  edit_inproceedings_view
+    Click Link  Create an Inproceedings Reference
+    Create an inproceedings reference  key=inproceedings123  author=kalle  title=kallen inproceedings  year=1999  booktitle=kirja
+    Go To Starting Page
+    Click Link  View Inproceedings References
+    Click Link  Edit Reference
+    Input Text  name=author  sami
+    Click Button  Update Inproceedings
+    Page Should Contain  Author: sami
