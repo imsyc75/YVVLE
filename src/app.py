@@ -115,7 +115,7 @@ def view_references():
 
 
 @app.route("/new_book")
-def new():
+def new_book():
     return render_template("new_book.html")
 
 

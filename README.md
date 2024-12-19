@@ -6,7 +6,6 @@
    
    ![image](https://github.com/user-attachments/assets/64a43875-aab0-4d7a-984d-e7443067c0bf)
 
-
 # Definition of done
 1. User stories are accepted
 2. The maintainability of the code should be as good as possible:
